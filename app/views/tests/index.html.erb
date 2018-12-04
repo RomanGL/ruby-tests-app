@@ -1,0 +1,22 @@
+<h1>Список тестов</h1>
+
+<table>
+  <tr>
+    <th>Название</th>
+    <th>Описание</th>
+    <th></th>
+  </tr>
+
+  <% @tests.each do |test| %>
+    <tr>
+      <td><%= test.title %></td>
+      <td><%= test.description %></td>
+      <td><%= link_to 'Открыть', test_path(test) %></td>
+      <td><%= link_to 'Удалить', test_path(test),
+              method: :delete,
+              data: { confirm: 'Вы уверены?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Создать тест', new_test_path %>

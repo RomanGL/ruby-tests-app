@@ -1,0 +1,17 @@
+<h1>Добавить тест</h1>
+
+<%= form_with scope: :test, url: tests_path, local: true do |form| %>
+  <p>
+    <%= form.label :'Название' %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :'Описание' %><br>
+    <%= form.text_area :description %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
