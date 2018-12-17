@@ -6,12 +6,16 @@ class QuizzesController < ApplicationController
   end
 
   def new
+    @quiz = Quiz.new
   end
 
   def create
     @quiz = Quiz.new quiz_params
-    @quiz.save
-    redirect_to @quiz
+    if @quiz.save
+      redirect_to @quiz
+    else
+      render 'new'
+    end
   end
 
   def show
