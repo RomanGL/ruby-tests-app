@@ -9,12 +9,26 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new
   end
 
+  def edit
+    @quiz = Quiz.find params[:id]
+  end
+
   def create
     @quiz = Quiz.new quiz_params
     if @quiz.save
       redirect_to @quiz
     else
       render 'new'
+    end
+  end
+
+  def update
+    @quiz = Quiz.find params[:id]
+
+    if @quiz.update quiz_params
+      redirect_to @quiz
+    else
+      render 'edit'
     end
   end
 
