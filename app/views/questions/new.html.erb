@@ -1,0 +1,27 @@
+<h1>Добавить вопрос к тесту "<%= @quiz.title %>"</h1>
+
+<%= form_with(model: [ @quiz, @quiz.questions.build ], local: true) do |form| %>
+
+  <% if @quiz.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@quiz.errors.count, "error") %> prohibited
+        this quiz from being saved:
+      </h2>
+      <ul>
+        <% @quiz.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :'Вопрос' %><br>
+    <%= form.text_field :question %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

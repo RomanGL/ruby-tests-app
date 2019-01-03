@@ -1,0 +1,8 @@
+<h1>Вопрос к тесту "<%= @quiz.title %>"</h1>
+
+<p>
+  <strong>Вопрос:</strong>
+  <%= @question.question %>
+</p>
+
+<%= link_to 'Вернуться к списку вопросов', quiz_questions_path(@quiz) %>
