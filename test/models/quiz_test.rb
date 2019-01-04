@@ -1,52 +1,52 @@
 require 'test_helper'
-require_relative '../../app/models/quiz'
 
 class QuizTest < ActiveSupport::TestCase
-  
-  test "should not save quiz without title" do
-    quiz = Quiz.new do |q|
-      q.title = nil
-      q.description = "Description"
-    end
-    assert_not quiz.save, "Saved the quiz without a title"
+
+  VALID_TITLE = 'Quiz title'
+  VALID_DESCRIPTION = 'Quiz description'
+
+  test 'valid quiz' do
+    quiz = Quiz.new title: VALID_TITLE, description: VALID_DESCRIPTION
+    assert quiz.valid?, 'quiz is invalid'
   end
 
-  test "should not save quiz with title length less than 5" do
-    quiz = Quiz.new do |q|
-      q.title = "1234"
-      q.description = "Description"
-    end
-    assert_not quiz.save, "Saved the quiz with title length less than 5"
+  test 'invalid without title' do
+    quiz = Quiz.new title: nil, description: VALID_DESCRIPTION
+
+    assert_not quiz.valid?, 'quiz is valid without title'
+    assert quiz.errors.added?(:title, :blank), 'no validation error for title present'
   end
 
-  test "should not save quiz without description" do
-    quiz = Quiz.new do |q|
-      q.title = "Title"
-      q.description = nil
-    end
+  test 'invalid with too short title' do
+    quiz = Quiz.new title: '1234', description: VALID_DESCRIPTION
 
-    assert_not quiz.save, "Saves quiz without description"
+    assert_not quiz.valid?, 'quiz is valid with too short title'
+    assert quiz.errors.added?(:title, :too_short), 'no validation error for too short title'
   end
 
-  test "should not save quiz with desciption length less than 5" do
-    quiz = Quiz.new do |q|
-      q.title = "Title"
-      q.description = "1234"
-    end
+  test 'invalid without description' do
+    quiz = Quiz.new title: VALID_TITLE, description: nil
 
-    assert_not quiz.save, "Saved quiz with description length less than 5"
+    assert_not quiz.valid?, 'quiz is valid without description'
+    assert quiz.errors.added?(:description, :blank), 'no validation error for description present'
   end
 
-  test "should not save quiz with description length greater than 1000" do
-    description = "1"
-    100.times { description = description + "ten length" }
+  test 'invalid with too short description' do
+    quiz = Quiz.new title: VALID_TITLE, description: '1234'
+
+    assert_not quiz.valid?, 'quiz is valid with too short description'
+    assert quiz.errors.added?(:description, :too_short), 'no validation error for too short description'
+  end
+
+  test 'invalid with too long description' do
+    # generating too large description
+    too_long_description = '1'
+    100.times { too_long_description = too_long_description + 'ten length' }
     # description length is 1 + 100 * 10 = 1001
 
-    quiz = Quiz.new do |q|
-      q.title = "Title"
-      q.description = description
-    end   
+    quiz = Quiz.new title: VALID_TITLE, description: too_long_description
 
-    assert_not quiz.save, "Saved quiz with description length greater than 1000"
+    assert_not quiz.valid?, 'quiz is valid with too long description'
+    assert quiz.errors.added?(:description, :too_long), 'no validation error for too long description'
   end
 end

@@ -18,7 +18,7 @@ class QuestionTest < ActiveSupport::TestCase
     assert question.errors.added?(:question, :blank), 'no validation error for question field present'
   end
 
-  test 'invalid with too_short question field' do
+  test 'invalid with too short question field' do
     question = Question.new question: '1234', quiz_id: VALID_QUIZ_ID
 
     assert_not question.valid?, 'question is valid with too short question field'
