@@ -8,4 +8,6 @@
   <%= @quiz.description %>
 </p>
 
+<%= link_to 'Список вопросов теста', quiz_questions_path(@quiz) %>
+</br>
 <%= link_to 'Вернуться к списку', controller: 'quizzes' %>

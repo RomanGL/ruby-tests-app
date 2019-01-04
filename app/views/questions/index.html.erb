@@ -1,0 +1,24 @@
+<h1>Список вопросов теста "<%= @quiz.title %>"</h1>
+
+<table>
+  <tr>
+    <th>Вопрос</th>
+    <th></th>
+  </tr>
+
+  <% @questions.each do |question| %>
+    <tr>
+      <td><%= question.question %></td>
+      <td><%= link_to 'Открыть', quiz_question_path(@quiz, question) %></td>
+      <td><%= link_to 'Изменить', edit_quiz_question_path(@quiz, question) %></td>
+      <td><%= link_to 'Удалить', quiz_question_path(@quiz, question),
+                      method: :delete,
+                      data: { confirm: 'Вы уверены?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+</br>
+<%= link_to 'Добавить вопрос', new_quiz_question_path %>
+</br>
+<%= link_to 'Вернуться к списку тестов', quizzes_path %>

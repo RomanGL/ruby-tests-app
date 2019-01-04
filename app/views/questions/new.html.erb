@@ -1,0 +1,13 @@
+<h1>Добавить вопрос к тесту "<%= @quiz.title %>"</h1>
+
+<%= form_with(model: [ @quiz, @quiz.questions.build ], local: true) do |form| %>
+
+  <p>
+    <%= form.label :'Вопрос' %><br>
+    <%= form.text_field :question %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
