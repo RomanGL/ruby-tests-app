@@ -18,9 +18,13 @@ class AnswersController < ApplicationController
   def create
     @quiz = Quiz.find params[:quiz_id]
     @question = @quiz.questions.find params[:question_id]
-    @answer = @question.answers.create answer_params
+    @answer = @question.answers.new answer_params
 
-    redirect_to quiz_question_answer_path(@quiz, @question, @answer)
+    if @answer.save
+      redirect_to quiz_question_answer_path(@quiz, @question, @answer)
+    else
+      render 'new'
+    end
   end
 
   def show
