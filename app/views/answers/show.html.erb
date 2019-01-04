@@ -1,0 +1,19 @@
+<h1>Тест "<%= @quiz.title %>"</h1>
+<h2>Ответ на вопрос "<%= @question.question %>"</h2>
+
+<p>
+  <strong>Ответ:</strong>
+  <%= @answer.title %>
+</p>
+
+<p>
+  <strong>Является верным:</strong>
+  <% if @answer.right  %>
+  Да
+  <% else %>
+  Нет
+  <% end %>
+</p>
+
+<br>
+<%= link_to 'Вернуться к списку ответов на вопрос', quiz_question_answers_path(@quiz, @question) %>

@@ -1,0 +1,19 @@
+<h1>Тест "<%= @quiz.title %>"</h1>
+<h2>Добавить ответ к вопросу "<%= @question.question %>"</h2>
+
+<%= form_with(model: [ @quiz, @question, @answer ], local: true) do |form| %>
+
+  <p>
+    <%= form.label :'Ответ' %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :'Является верным?' %><br>
+    <%= form.check_box :right %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
