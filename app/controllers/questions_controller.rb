@@ -14,9 +14,13 @@ class QuestionsController < ApplicationController
 
   def create
     @quiz = Quiz.find params[:quiz_id]
-    @question = @quiz.questions.create question_params
+    @question = @quiz.questions.new question_params
 
-    redirect_to quiz_question_path(@quiz, @question)
+    if @question.save
+      redirect_to quiz_question_path(@quiz, @question)
+    else
+      render 'new'
+    end
   end
 
   def show
