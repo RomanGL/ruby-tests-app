@@ -1,16 +1,46 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+ @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ html {
+  overflow-y: scroll;
+}
+
+body {
+  color: black;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+table {
+  vertical-align: middle;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+}
+
+ .navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default {
+  background-color: #0078ca;
+  border-color:#0078ca;
+  height: 70px;
+  padding-inline-start: 30px;
+  font-size: 20px;
+  padding-top: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color:white;
+}
+ 
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color:lightskyblue;
+}
+textarea {
+  resize: vertical;
+}

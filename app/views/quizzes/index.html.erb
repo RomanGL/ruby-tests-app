@@ -1,6 +1,7 @@
+
 <h1>Список тестов</h1>
 
-<table>
+<table align = "center">
   <tr>
     <th>Название</th>
     <th>Описание</th>
@@ -8,7 +9,7 @@
   </tr>
 
   <% @quizzes.each do |quiz| %>
-    <tr>
+    <tr class = "table-active">
       <td><%= quiz.title %></td>
       <td><%= quiz.description %></td>
       <td>
