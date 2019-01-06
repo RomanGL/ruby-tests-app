@@ -24,6 +24,8 @@ body {
   color: black;
   text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: whitesmoke;
+
 }
 
 table {
@@ -33,23 +35,28 @@ table {
   color: black;
 }
 
-header {
-  padding-top: 10px;
-  background-color: #0078ca;
-  padding-inline-start: 30px;
-  font-size: 20px;
-  height: 70px;
-  }
-
-.color {
+ .navbar-default .navbar-brand {
   color: white;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
- }
-  
-section {
-  overflow: auto;
 }
 
+.navbar-default {
+  background-color: #0078ca;
+  border-color:#0078ca;
+  height: 70px;
+  padding-inline-start: 30px;
+  font-size: 20px;
+  padding-top: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color:white;
+}
+ 
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color:lightskyblue;
+}
 textarea {
   resize: vertical;
 }
