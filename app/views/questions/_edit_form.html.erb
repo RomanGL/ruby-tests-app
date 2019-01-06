@@ -1,17 +1,4 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid header">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">....</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#">Главная</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right ">
-      <li><a href="#">Авторизация</a></li>
-      <li><a href="#">Регистрация</a></li>
-    </ul>
-  </div>
-</nav>
+
 <%= form_with(model: [ @quiz, @question ], local: true) do |form| %>
 
   <% if @question.errors.any? %>
