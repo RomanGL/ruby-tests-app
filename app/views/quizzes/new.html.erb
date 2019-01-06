@@ -1,31 +1,5 @@
 <h1>Добавить тест</h1>
 
-<%= form_with scope: :quiz, url: quizzes_path, local: true do |form| %>
+<%= render 'quizzes/edit_form' %>
 
-  <% if @quiz.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:
-      </h2>
-      <ul>
-        <% @quiz.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p>
-    <%= form.label :'Название' %><br>
-    <%= form.text_field :title %>
-  </p>
-
-  <p>
-    <%= form.label :'Описание' %><br>
-    <%= form.text_area :description %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<%= link_to 'Вернуться к списку', controller: 'quizzes' %>

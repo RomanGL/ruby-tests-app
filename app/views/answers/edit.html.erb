@@ -1,32 +1,10 @@
 <h1>Тест "<%= @quiz.title %>"</h1>
 <h2>Изменить ответ к вопросу "<%= @question.question %>"</h2>
 
-<%= form_with(model: [ @quiz, @question, @answer ], local: true) do |form| %>
+<%= render 'answers/edit_form' %>
 
-  <% if @answer.errors.any? %>
-    <div id="error_explanation">
-      <h3>
-        <%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:
-      </h3>
-      <ul>
-        <% @answer.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p>
-    <%= form.label :'Ответ' %><br>
-    <%= form.text_field :title %>
-  </p>
-
-  <p>
-    <%= form.label :'Является верным?' %><br>
-    <%= form.check_box :right %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<%= link_to 'Вернуться к списку ответов',
+            controller: 'answers',
+            action: 'index',
+            quiz_id: @quiz.id,
+            question_id: @question.id %>
