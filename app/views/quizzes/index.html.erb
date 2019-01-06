@@ -11,14 +11,26 @@
     <tr>
       <td><%= quiz.title %></td>
       <td><%= quiz.description %></td>
-      <td><%= link_to 'Открыть', quiz_path(quiz) %></td>
-      <td><%= link_to 'Изменить', edit_quiz_path(quiz) %></td>
-      <td><%= link_to 'Удалить', quiz_path(quiz),
-              method: :delete,
-              data: { confirm: 'Вы уверены?' } %></td>
+      <td>
+        <div class="btn-group">
+          <%= link_to 'Открыть',
+                      quiz_path(quiz),
+                      class: 'btn btn-success' %>
+          <%= link_to 'Изменить',
+                      edit_quiz_path(quiz),
+                      class: 'btn btn-success' %>
+          <%= link_to 'Удалить',
+                      quiz_path(quiz),
+                      class: 'btn btn-danger',
+                      method: :delete,
+                      data: { confirm: 'Вы уверены?' } %>
+        </div>
+      </td>
     </tr>
   <% end %>
 </table>
 
 <br>
-<%= link_to 'Создать тест', new_quiz_path %>
+<%= link_to 'Создать тест',
+            new_quiz_path,
+            class: 'btn btn-success'%>
