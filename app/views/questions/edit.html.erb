@@ -1,26 +1,8 @@
 <h1>Изменить вопрос к тесту "<%= @quiz.title %>"</h1>
 
-<%= form_with(model: [ @quiz, @question ], local: true) do |form| %>
+<%= render 'questions/edit_form' %>
 
-  <% if @question.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:
-      </h2>
-      <ul>
-        <% @question.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p>
-    <%= form.label :'Вопрос' %><br>
-    <%= form.text_field :question %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<%= link_to 'Вернуться к списку вопросов',
+            controller: 'questions',
+            action: 'index',
+            quiz_id: @quiz.id %>
