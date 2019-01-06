@@ -9,16 +9,29 @@
   <% @questions.each do |question| %>
     <tr>
       <td><%= question.question %></td>
-      <td><%= link_to 'Открыть', quiz_question_path(@quiz, question) %></td>
-      <td><%= link_to 'Изменить', edit_quiz_question_path(@quiz, question) %></td>
-      <td><%= link_to 'Удалить', quiz_question_path(@quiz, question),
+      <td>
+        <div class="btn-group">
+          <%= link_to 'Открыть',
+                      quiz_question_path(@quiz, question),
+                      class: 'btn btn-success' %>
+          <%= link_to 'Изменить',
+                      edit_quiz_question_path(@quiz, question),
+                      class: 'btn btn-success' %>
+          <%= link_to 'Удалить',
+                      quiz_question_path(@quiz, question),
+                      class: 'btn btn-danger',
                       method: :delete,
-                      data: { confirm: 'Вы уверены?' } %></td>
+                      data: { confirm: 'Вы уверены?' } %>
+        </div>
+      </td>
     </tr>
   <% end %>
 </table>
 
 </br>
-<%= link_to 'Добавить вопрос', new_quiz_question_path %>
-</br>
-<%= link_to 'Вернуться к списку тестов', quizzes_path %>
+<%= link_to 'Вернуться к списку тестов',
+            quizzes_path,
+            class: 'btn btn-default'%>
+<%= link_to 'Добавить вопрос',
+            new_quiz_question_path,
+            class: 'btn btn-success'%>

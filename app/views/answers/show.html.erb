@@ -15,5 +15,11 @@
   <% end %>
 </p>
 
-<br>
-<%= link_to 'Вернуться к списку ответов на вопрос', quiz_question_answers_path(@quiz, @question) %>
+<%= link_to 'Вернуться к списку ответов',
+            {
+                :controller => 'answers',
+                :action => 'index',
+                :quiz_id => @quiz.id,
+                :question_id => @question.id
+            },
+            { :class => 'btn btn-default' } %>

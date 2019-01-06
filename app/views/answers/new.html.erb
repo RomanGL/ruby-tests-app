@@ -4,7 +4,10 @@
 <%= render 'answers/edit_form' %>
 
 <%= link_to 'Вернуться к списку ответов',
-            controller: 'answers',
-            action: 'index',
-            quiz_id: @quiz.id,
-            question_id: @question.id %>
+            {
+                :controller => 'answers',
+                :action => 'index',
+                :quiz_id => @quiz.id,
+                :question_id => @question.id
+            },
+            { :class => 'btn btn-default' } %>

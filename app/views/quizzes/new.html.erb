@@ -2,4 +2,6 @@
 
 <%= render 'quizzes/edit_form' %>
 
-<%= link_to 'Вернуться к списку', controller: 'quizzes' %>
+<%= link_to 'Вернуться к списку',
+            { :controller => 'quizzes', :action => 'index' },
+            { :class => 'btn btn-default' } %>

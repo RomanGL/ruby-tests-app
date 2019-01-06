@@ -8,6 +8,13 @@
   <%= @quiz.description %>
 </p>
 
-<%= link_to 'Список вопросов теста', quiz_questions_path(@quiz) %>
-</br>
-<%= link_to 'Вернуться к списку', controller: 'quizzes' %>
+<%= link_to 'Список вопросов теста',
+            {
+                :controller => 'questions',
+                :action => 'index' ,
+                :quiz_id => @quiz.id
+            },
+            { :class => 'btn btn-success' } %>
+<%= link_to 'Вернуться к списку',
+            { :controller => 'quizzes', :action => 'index' },
+            { :class => 'btn btn-default' } %>
