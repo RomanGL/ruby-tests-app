@@ -1,3 +1,22 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid header">
+    <ul class="nav navbar-nav">
+      <li><a href="#">Главная</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right ">
+        <% if user_signed_in? %>
+        <span>Здравствуйте, <%= current_user.email %></span>
+        <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+        <%= link_to 'Редактировать профиль', edit_user_registration_path %>
+
+        <% else %>
+        <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+        <% end %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+    </ul>
+  </div>
+</nav>
 <% content_for :page_title do %>
   <%= t('views.welcome.page_title') %>
 <% end %>
