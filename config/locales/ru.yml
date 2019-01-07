@@ -1,0 +1,15 @@
+ru:
+  activerecord:
+    models:
+      quiz: Тест
+      question: Вопрос
+      answer: Ответ на вопрос
+    attributes:
+      quiz:
+        title: Название
+        description: Описание
+      question:
+        question: Вопрос
+      answer:
+        title: Ответ
+        right: Ответ верный

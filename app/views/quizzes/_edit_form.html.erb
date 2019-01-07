@@ -1,31 +1,51 @@
+<div class="container">
+  <%= form_with(model: @quiz, remote: request.xhr?, html: {data: {modal: true}}) do |form| %>
 
-<%= form_with(model: @quiz, local: true)  do |form| %>
+    <% if @quiz.errors.any? %>
+      <div class="alert alert-danger mt-3" role="alert">
+        Некоторые поля заполнены неверно.
+      </div>
+    <% end %>
 
-  <% if @quiz.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:
-      </h2>
-      <ul>
-        <% @quiz.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <div class="form-group">
+      <%= form.label :'Название' %>
+
+      <% if @quiz.errors.has_key?(:title) %>
+        <%= form.text_field :title, :class => 'form-control is-invalid', :placeholder => 'Введите название теста' %>
+
+        <div class="invalid-feedback">
+          <% @quiz.errors.full_messages_for(:title).each do |msg| %>
+            <%= msg %><br>
+          <% end %>
+        </div>
+      <% else %>
+        <%= form.text_field :title, :class => 'form-control', :placeholder => 'Введите название теста' %>
+      <% end %>
+
+      <small class="form-text text-muted">Не менее 5 символов.</small>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :'Описание' %>
+
+      <% if @quiz.errors.has_key?(:description) %>
+        <%= form.text_area :description, :class => 'form-control is-invalid', :placeholder => 'Введите описание теста' %>
+
+        <div class="invalid-feedback">
+          <% @quiz.errors.full_messages_for(:description).each do |msg| %>
+            <%= msg %><br>
+          <% end %>
+        </div>
+      <% else %>
+        <%= form.text_area :description, :class => 'form-control', :placeholder => 'Введите описание теста' %>
+      <% end %>
+
+      <small class="form-text text-muted">От 5 до 1000 символов.</small>
+    </div>
+
+    <div class="modal-footer">
+      <%= form.submit 'Сохранить тест',
+                      :class => 'btn btn-success' %>
     </div>
   <% end %>
-
-  <p>
-    <%= form.label :'Название' %><br>
-    <%= form.text_field :title %>
-  </p>
-
-  <p>
-    <%= form.label :'Описание' %><br>
-    <%= form.text_area :description %>
-  </p>
-
-  <p>
-    <%= form.submit 'Сохранить тест',
-                    :class => 'btn btn-success'%>
-  </p>
-<% end %>
+</div>

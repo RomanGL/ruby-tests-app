@@ -1,37 +1,46 @@
+<div class="jumbotron py-4 px-4">
+  <h1 class="display-4">Тесты</h1>
+  <p class="lead">На данной странице представлены все доступные тесты.</p>
+  <hr class="my-4">
+  <p class="lead">
+    <%= link_to 'Создать тест', new_quiz_path, class: 'btn btn-primary btn-lg', data: { modal: true } %>
+  </p>
+</div>
 
-<h1>Список тестов</h1>
-
-<table align = "center">
-  <tr>
-    <th>Название</th>
-    <th>Описание</th>
-    <th></th>
-  </tr>
+<div class="container-fluid">
+  <div class="row d-none d-md-flex">
+    <div class="col-md-3">
+      <h5>Название теста</h5>
+    </div>
+    <div class="col grow">
+      <h5>Описание теста</h5>
+    </div>
+  </div>
 
   <% @quizzes.each do |quiz| %>
-    <tr class = "table-active">
-      <td><%= quiz.title %></td>
-      <td><%= quiz.description %></td>
-      <td>
-        <div class="btn-group">
+    <div class="row mb-2">
+      <div class="col-md-3">
+        <h6><%= quiz.title %></h6>
+      </div>
+      <div class="col grow">
+        <%= quiz.description %>
+      </div>
+      <div class="col-md-auto shrink">
+        <div class="btn-group mt-2 mb-4 my-md-0">
           <%= link_to 'Открыть',
                       quiz_path(quiz),
                       class: 'btn btn-success' %>
           <%= link_to 'Изменить',
                       edit_quiz_path(quiz),
-                      class: 'btn btn-success' %>
+                      class: 'btn btn-success',
+                      data: { modal: true } %>
           <%= link_to 'Удалить',
                       quiz_path(quiz),
                       class: 'btn btn-danger',
                       method: :delete,
                       data: { confirm: 'Вы уверены?' } %>
         </div>
-      </td>
-    </tr>
+      </div>
+    </div>
   <% end %>
-</table>
-
-<br>
-<%= link_to 'Создать тест',
-            new_quiz_path,
-            class: 'btn btn-success'%>
+</div>

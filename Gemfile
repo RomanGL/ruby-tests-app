@@ -16,7 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 # Use Bootstrap 4
 gem 'bootstrap', '~> 4.2.1'
 gem 'jquery-rails'
-
+gem 'responders'
+gem 'russian'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
