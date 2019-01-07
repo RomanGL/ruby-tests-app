@@ -10,25 +10,11 @@ class QuizTest < ActiveSupport::TestCase
     assert quiz.valid?, 'quiz is invalid'
   end
 
-  test 'invalid without title' do
-    quiz = Quiz.new title: nil, description: VALID_DESCRIPTION
-
-    assert_not quiz.valid?, 'quiz is valid without title'
-    assert quiz.errors.added?(:title, :blank), 'no validation error for title present'
-  end
-
   test 'invalid with too short title' do
     quiz = Quiz.new title: '1234', description: VALID_DESCRIPTION
 
     assert_not quiz.valid?, 'quiz is valid with too short title'
     assert quiz.errors.added?(:title, :too_short), 'no validation error for too short title'
-  end
-
-  test 'invalid without description' do
-    quiz = Quiz.new title: VALID_TITLE, description: nil
-
-    assert_not quiz.valid?, 'quiz is valid without description'
-    assert quiz.errors.added?(:description, :blank), 'no validation error for description present'
   end
 
   test 'invalid with too short description' do
