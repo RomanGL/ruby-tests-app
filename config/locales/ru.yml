@@ -13,3 +13,8 @@ ru:
       answer:
         title: Ответ
         right: Ответ верный
+
+  form_messages:
+    validation_error: Некоторые поля заполнены неверно.
+    required_minimum_input_length: Не менее %{count} символов.
+    required_input_length: От %{from} до %{to} символов.

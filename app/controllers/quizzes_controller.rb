@@ -1,5 +1,3 @@
-require_relative '../models/quiz'
-
 class QuizzesController < ApplicationController
   respond_to :html, :json
 
@@ -34,10 +32,6 @@ class QuizzesController < ApplicationController
     else
       respond_modal_with @quiz, location: new_quiz_path
     end
-  end
-
-  def show
-    @quiz = Quiz.find params[:id]
   end
 
   def destroy

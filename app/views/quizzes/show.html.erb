@@ -1,13 +1,7 @@
-
-<p>
-  <strong>Название:</strong>
-  <%= @quiz.title %>
-</p>
-
-<p>
-  <strong>Описание:</strong>
-  <%= @quiz.description %>
-</p>
+<div class="jumbotron py-4 px-4">
+  <h1 class="display-4"><%= @quiz.title %></h1>
+  <p class="lead"><%= @quiz.description %></p>
+</div>
 
 <%= link_to 'Список вопросов теста',
             {

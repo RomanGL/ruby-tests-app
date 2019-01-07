@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
-  resources :quizzes do
-    resources :questions do
+  resources :quizzes, only: [ :index, :new, :edit, :create, :update, :destroy ] do
+    resources :questions, only: [ :index, :new, :edit, :create, :update, :destroy ] do
       resources :answers
     end
   end

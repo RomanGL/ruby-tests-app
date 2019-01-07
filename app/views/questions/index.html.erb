@@ -1,38 +1,45 @@
+<div class="jumbotron py-4 px-4">
+  <h1 class="display-4"><%= @quiz.title %></h1>
+  <p class="lead"><%= @quiz.description %></p>
+  <hr class="my-4">
+  <p class="lead">
+    <%= link_to 'Добавить вопрос', new_quiz_question_path, class: 'btn btn-primary', data: { modal: true } %>
+  </p>
+</div>
 
-<h1>Список вопросов теста "<%= @quiz.title %>"</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col grow">
+      <h5>Вопросы</h5>
+    </div>
+  </div>
 
-<table>
-  <tr>
-    <th>Вопрос</th>
-    <th></th>
-  </tr>
-
-  <% @questions.each do |question| %>
-    <tr>
-      <td><%= question.question %></td>
-      <td>
-        <div class="btn-group">
-          <%= link_to 'Открыть',
-                      quiz_question_path(@quiz, question),
-                      class: 'btn btn-success' %>
+  <% @questions.each do |q| %>
+    <div class="row mb-2 align-items-center">
+      <div class="col grow">
+        <h6><%= q.question %></h6>
+      </div>
+      <div class="col-md-auto shrink">
+        <div class="btn-group mt-0 mb-4 my-md-0">
+          <%= link_to 'Варианты ответов',
+                      {
+                          :controller => 'answers',
+                          :action => 'index' ,
+                          :quiz_id => @quiz.id,
+                          :question_id => q.id
+                      },
+                      { :class => 'btn btn-primary' } %>
           <%= link_to 'Изменить',
-                      edit_quiz_question_path(@quiz, question),
-                      class: 'btn btn-success' %>
+                      edit_quiz_question_path(@quiz, q),
+                      class: 'btn btn-success',
+                      data: { modal: true } %>
           <%= link_to 'Удалить',
-                      quiz_question_path(@quiz, question),
+                      quiz_question_path(@quiz, q),
                       class: 'btn btn-danger',
                       method: :delete,
                       data: { confirm: 'Вы уверены?' } %>
         </div>
-      </td>
-    </tr>
+      </div>
+    </div>
   <% end %>
-</table>
-
-</br>
-<%= link_to 'Вернуться к списку тестов',
-            quizzes_path,
-            class: 'btn btn-default'%>
-<%= link_to 'Добавить вопрос',
-            new_quiz_question_path,
-            class: 'btn btn-success'%>
+</div>

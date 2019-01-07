@@ -3,7 +3,7 @@
 
     <% if @quiz.errors.any? %>
       <div class="alert alert-danger mt-3" role="alert">
-        Некоторые поля заполнены неверно.
+        <%= t('form_messages.validation_error') %>
       </div>
     <% end %>
 
@@ -20,9 +20,10 @@
         </div>
       <% else %>
         <%= form.text_field :title, :class => 'form-control', :placeholder => 'Введите название теста' %>
+        <small class="form-text text-muted">
+          <%= t('form_messages.required_minimum_input_length', count: 5) %>
+        </small>
       <% end %>
-
-      <small class="form-text text-muted">Не менее 5 символов.</small>
     </div>
 
     <div class="form-group">
@@ -40,7 +41,9 @@
         <%= form.text_area :description, :class => 'form-control', :placeholder => 'Введите описание теста' %>
       <% end %>
 
-      <small class="form-text text-muted">От 5 до 1000 символов.</small>
+      <small class="form-text text-muted">
+        <%= t('form_messages.required_input_length', from: 5, to: 1000) %>
+      </small>
     </div>
 
     <div class="modal-footer">
