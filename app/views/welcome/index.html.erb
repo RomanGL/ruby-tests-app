@@ -5,7 +5,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right ">
         <% if user_signed_in? %>
-        <span>Здравствуйте, <%= current_user.email %></span>
+        <span>Здравствуйте, <%= current_user.name %></span>
         <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
         <%= link_to 'Редактировать профиль', edit_user_registration_path %>
 
