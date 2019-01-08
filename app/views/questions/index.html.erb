@@ -2,7 +2,19 @@
   <%= t('views.questions.page_title', quiz_title: @quiz.title) %>
 <% end %>
 
-<div class="jumbotron py-4 px-4">
+<nav>
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.home_link'), root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.quizzes_link'), quizzes_path %>
+    </li>
+    <li class="breadcrumb-item active"><%= truncate(@quiz.title, length: 20) %></li>
+  </ol>
+</nav>
+
+<div class="jumbotron pb-4 pt-2 px-4 mt-0">
   <h1 class="display-4"><%= @quiz.title %></h1>
   <p class="lead"><%= @quiz.description %></p>
   <hr class="my-4">

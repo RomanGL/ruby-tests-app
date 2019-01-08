@@ -39,6 +39,10 @@ ru:
       home_link: Главная
       quizzes_link: Тесты
 
+    page_navbar:
+      home_link: Главная
+      quizzes_link: Тесты
+
     welcome:
       page_title: Главная - Система тестирования
       jumbo_title: Система тестирования
