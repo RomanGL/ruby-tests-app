@@ -1,31 +1,47 @@
+<div class="container">
+  <%= form_with(model: [@quiz, @question, @answer], remote: request.xhr?, html: {data: {modal: true}}) do |form| %>
 
-<%= form_with(model: [ @quiz, @question, @answer ], local: true) do |form| %>
+    <% if @answer.errors.any? %>
+      <div class="alert alert-danger mt-3" role="alert">
+        <%= t('form_messages.validation_error') %>
+      </div>
+    <% end %>
 
-  <% if @answer.errors.any? %>
-    <div id="error_explanation">
-      <h3>
-        <%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:
-      </h3>
-      <ul>
-        <% @answer.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <div class="form-group mt-2">
+      <%= form.label t('views.answers.form.answer') %>
+
+      <% if @answer.errors.has_key?(:title) %>
+        <%= form.text_field :title,
+                            :class => 'form-control is-invalid',
+                            :placeholder => t('views.answers.form.enter_answer') %>
+
+        <div class="invalid-feedback">
+          <% @answer.errors.full_messages_for(:title).each do |msg| %>
+            <%= msg %><br>
+          <% end %>
+        </div>
+      <% else %>
+        <%= form.text_field :title,
+                            :class => 'form-control',
+                            :placeholder => t('views.answers.form.enter_answer') %>
+        <small class="form-text text-muted">
+          <%= t('form_messages.required_input') %>
+        </small>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+      <%= form.check_box :right,
+                         :class => 'form-check-input' %>
+      <%= form.label t('views.answers.form.answer_right'),
+                     :class => 'form-check-label' %>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <%= form.submit t('views.answers.form.save_button'),
+                      :class => 'btn btn-success' %>
     </div>
   <% end %>
-
-  <p>
-    <%= form.label :'Ответ' %><br>
-    <%= form.text_field :title %>
-  </p>
-
-  <p>
-    <%= form.label :'Является верным?' %><br>
-    <%= form.check_box :right %>
-  </p>
-
-  <p>
-    <%= form.submit 'Сохранить вопрос',
-                    :class => 'btn btn-success'%>
-  </p>
-<% end %>
+</div>

@@ -7,11 +7,13 @@
       </div>
     <% end %>
 
-    <div class="form-group">
-      <%= form.label :'Название' %>
+    <div class="form-group mt-2">
+      <%= form.label t('views.quizzes.form.title') %>
 
       <% if @quiz.errors.has_key?(:title) %>
-        <%= form.text_field :title, :class => 'form-control is-invalid', :placeholder => 'Введите название теста' %>
+        <%= form.text_field :title,
+                            :class => 'form-control is-invalid',
+                            :placeholder => t('views.quizzes.form.enter_title') %>
 
         <div class="invalid-feedback">
           <% @quiz.errors.full_messages_for(:title).each do |msg| %>
@@ -19,7 +21,9 @@
           <% end %>
         </div>
       <% else %>
-        <%= form.text_field :title, :class => 'form-control', :placeholder => 'Введите название теста' %>
+        <%= form.text_field :title,
+                            :class => 'form-control',
+                            :placeholder => t('views.quizzes.form.enter_title') %>
         <small class="form-text text-muted">
           <%= t('form_messages.required_minimum_input_length', count: 5) %>
         </small>
@@ -27,10 +31,12 @@
     </div>
 
     <div class="form-group">
-      <%= form.label :'Описание' %>
+      <%= form.label t('views.quizzes.form.description') %>
 
       <% if @quiz.errors.has_key?(:description) %>
-        <%= form.text_area :description, :class => 'form-control is-invalid', :placeholder => 'Введите описание теста' %>
+        <%= form.text_area :description,
+                           :class => 'form-control is-invalid',
+                           :placeholder => t('views.quizzes.form.enter_description') %>
 
         <div class="invalid-feedback">
           <% @quiz.errors.full_messages_for(:description).each do |msg| %>
@@ -38,7 +44,9 @@
           <% end %>
         </div>
       <% else %>
-        <%= form.text_area :description, :class => 'form-control', :placeholder => 'Введите описание теста' %>
+        <%= form.text_area :description,
+                           :class => 'form-control',
+                           :placeholder => t('views.quizzes.form.enter_description') %>
       <% end %>
 
       <small class="form-text text-muted">
@@ -47,7 +55,7 @@
     </div>
 
     <div class="modal-footer">
-      <%= form.submit 'Сохранить тест',
+      <%= form.submit t('views.quizzes.form.save_button'),
                       :class => 'btn btn-success' %>
     </div>
   <% end %>

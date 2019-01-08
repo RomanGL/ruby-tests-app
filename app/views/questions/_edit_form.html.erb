@@ -7,11 +7,13 @@
       </div>
     <% end %>
 
-    <div class="form-group">
-      <%= form.label :'Вопрос' %>
+    <div class="form-group mt-2">
+      <%= form.label t('views.questions.form.question') %>
 
       <% if @question.errors.has_key?(:question) %>
-        <%= form.text_field :question, :class => 'form-control is-invalid', :placeholder => 'Введите вопрос' %>
+        <%= form.text_field :question,
+                            :class => 'form-control is-invalid',
+                            :placeholder => t('views.questions.form.enter_question') %>
 
         <div class="invalid-feedback">
           <% @question.errors.full_messages_for(:question).each do |msg| %>
@@ -19,7 +21,9 @@
           <% end %>
         </div>
       <% else %>
-        <%= form.text_field :question, :class => 'form-control', :placeholder => 'Введите вопрос' %>
+        <%= form.text_field :question,
+                            :class => 'form-control',
+                            :placeholder => t('views.questions.form.enter_question') %>
         <small class="form-text text-muted">
           <%= t('form_messages.required_minimum_input_length', count: 5) %>
         </small>
@@ -27,7 +31,7 @@
     </div>
 
     <div class="modal-footer">
-      <%= form.submit 'Сохранить вопрос',
+      <%= form.submit t('views.questions.form.save_button'),
                       :class => 'btn btn-success' %>
     </div>
   <% end %>

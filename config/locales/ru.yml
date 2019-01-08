@@ -18,3 +18,94 @@ ru:
     validation_error: Некоторые поля заполнены неверно.
     required_minimum_input_length: Не менее %{count} символов.
     required_input_length: От %{from} до %{to} символов.
+    required_input: Не может быть пустым.
+
+  views:
+    common:
+      'yes': Да
+      'no': Нет
+
+      actions: Действия
+      title: Название
+      description: Описание
+
+      are_you_sure_message: Вы уверены?
+
+      edit_button: Изменить
+      remove_button: Удалить
+
+    navbar:
+      brand_name: Система тестирования
+      home_link: Главная
+      quizzes_link: Тесты
+
+    welcome:
+      page_title: Главная - Система тестирования
+      jumbo_title: Система тестирования
+      jumbo_description: Простой и удобный сервис для создания и решения тестов.
+      jumbo_unauthorized_message: Чтобы начать пользоваться сервисом, вам необходимо войти или зарегистрироваться.
+
+      sign_in_button: Войти
+      sign_up_button: Зарегистрироваться
+
+    quizzes:
+      page_title: Тесты
+      jumbo_title: Тесты
+      jumbo_description: На данной странице представлены все доступные тесты.
+
+      empty_list: Ни одного теста не существует. Создайте свой первый тест!
+
+      questions_button: Вопросы
+      create_button: Создать тест
+
+      new:
+        modal_title: Создать тест
+
+      edit:
+        modal_title: Изменить тест
+
+      form:
+        title: Назавание
+        description: Описание
+        enter_title: Введите название теста
+        enter_description: Введите описание теста
+        save_button: Сохранить тест
+
+    questions:
+      page_title: Вопросы в "%{quiz_title}"
+      empty_list: У теста нет еще ни одного вопроса. Добавьте в тест первый вопрос при помощи кнопки "Добавить вопрос".
+      answers: Вопросы
+
+      create_button: Добавить вопрос
+      answers_button: Варианты ответов
+
+      new:
+        modal_title: Добавить вопрос
+
+      edit:
+        modal_title: Изменить вопрос
+
+      form:
+        question: Вопрос
+        enter_question: Введите вопрос
+        save_button: Сохранить вопрос
+
+    answers:
+      page_title: Ответы на вопрос "%{question}"
+      empty_list: У этого вопроса еще нет вариантов ответов. Добавьте варианты ответов при помощи кнопки "Добавить ответ".
+      answers: Варианты ответов
+      answer_right: Ответ верный?
+
+      create_button: Добавить ответ
+
+      new:
+        modal_title: Изменить ответ
+
+      edit:
+        modal_title: Добавить ответ
+
+      form:
+        answer: Ответ
+        answer_right: Является верным
+        enter_answer: Введите ответ
+        save_button: Сохранить ответ

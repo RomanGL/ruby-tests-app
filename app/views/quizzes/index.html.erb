@@ -1,51 +1,65 @@
+<% content_for :page_title do %>
+  <%= t('views.quizzes.page_title') %>
+<% end %>
+
 <div class="jumbotron py-4 px-4">
-  <h1 class="display-4">Тесты</h1>
-  <p class="lead">На данной странице представлены все доступные тесты.</p>
+  <h1 class="display-4"><%= t('views.quizzes.jumbo_title') %></h1>
+  <p class="lead"><%= t('views.quizzes.jumbo_description') %></p>
   <hr class="my-4">
   <p class="lead">
-    <%= link_to 'Создать тест', new_quiz_path, class: 'btn btn-primary', data: { modal: true } %>
+    <%= link_to t('views.quizzes.create_button'),
+                new_quiz_path,
+                class: 'btn btn-primary',
+                data: { modal: true } %>
   </p>
 </div>
 
-<table class="table table-hover">
-  <thead class="thead-light">
-  <tr>
-    <th class="w-25">Название</th>
-    <th class="w-75">Описание</th>
-    <th class="w-25">Действия</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @quizzes.each do |quiz| %>
+<% if @quizzes.any? %>
+  <table class="table table-hover">
+    <thead class="thead-light">
     <tr>
-      <td class="w-25">
-        <%= quiz.title %>
-      </td>
-      <td class="w-75">
-        <%= quiz.description %>
-      </td>
-      <td class="w-25">
-        <div class="btn-group mt-2 mb-4 my-md-0">
-          <%= link_to 'Вопросы',
-                      {
-                          :controller => 'questions',
-                          :action => 'index' ,
-                          :quiz_id => quiz.id
-                      },
-                      { :class => 'btn btn-primary' } %>
-          <%= link_to 'Изменить',
-                      edit_quiz_path(quiz),
-                      class: 'btn btn-success',
-                      data: { modal: true } %>
-          <%= link_to 'Удалить',
-                      quiz_path(quiz),
-                      class: 'btn btn-danger',
-                      method: :delete,
-                      data: { confirm: 'Вы уверены?' } %>
-        </div>
-      </td>
+      <th class="w-25"><%= t('views.common.title') %></th>
+      <th class="w-75"><%= t('views.common.description') %></th>
+      <th class="w-25"><%= t('views.common.actions') %></th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+    <% @quizzes.each do |quiz| %>
+      <tr>
+        <td class="w-25">
+          <%= quiz.title %>
+        </td>
+        <td class="w-75">
+          <%= quiz.description %>
+        </td>
+        <td class="w-25">
+          <div class="btn-group mt-2 mb-4 my-md-0">
+            <%= link_to t('views.quizzes.questions_button'),
+                        {
+                            :controller => 'questions',
+                            :action => 'index' ,
+                            :quiz_id => quiz.id
+                        },
+                        { :class => 'btn btn-primary' } %>
+            <%= link_to t('views.common.edit_button'),
+                        edit_quiz_path(quiz),
+                        class: 'btn btn-success',
+                        data: { modal: true } %>
+            <%= link_to t('views.common.remove_button'),
+                        quiz_path(quiz),
+                        class: 'btn btn-danger',
+                        method: :delete,
+                        data: { confirm: t('views.common.are_you_sure_message') } %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info my-3 mx-3" role="alert">
+    <%= t('views.quizzes.empty_list') %>
+  </div>
+<% end %>
+

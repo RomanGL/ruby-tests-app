@@ -1,14 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Система тестирования</a>
+  <%= link_to t('views.navbar.brand_name'),
+              root_path,
+              { :class => 'navbar-brand' } %>
 
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <%= link_to 'Главная', '/',
+        <%= link_to t('views.navbar.home_link'),
+                    root_path,
                     { :class => 'nav-link' } %>
       </li>
       <li class="nav-item">
-        <%= link_to 'Тесты',
+        <%= link_to t('views.navbar.quizzes_link'),
                     { :controller => 'quizzes', :action => 'index' },
                     { :class => 'nav-link' } %>
       </li>
