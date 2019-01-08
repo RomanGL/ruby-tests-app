@@ -1,24 +1,26 @@
-require_relative '../models/quiz'
-
 class QuizzesController < ApplicationController
+  respond_to :html, :json
+
   def index
     @quizzes = Quiz.all
   end
 
   def new
     @quiz = Quiz.new
+    respond_modal_with @quiz
   end
 
   def edit
     @quiz = Quiz.find params[:id]
+    respond_modal_with @quiz
   end
 
   def create
     @quiz = Quiz.new quiz_params
     if @quiz.save
-      redirect_to @quiz
+      respond_modal_with @quiz, location: quizzes_path
     else
-      render 'new'
+      respond_modal_with @quiz, location: new_quiz_path
     end
   end
 
@@ -26,14 +28,10 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find params[:id]
 
     if @quiz.update quiz_params
-      redirect_to @quiz
+      respond_modal_with @quiz, location: quizzes_path
     else
-      render 'edit'
+      respond_modal_with @quiz, location: new_quiz_path
     end
-  end
-
-  def show
-    @quiz = Quiz.find params[:id]
   end
 
   def destroy

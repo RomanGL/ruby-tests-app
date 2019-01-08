@@ -1,8 +1,5 @@
-
-<h1>Редактирование теста</h1>
+<% content_for :modal_title do %>
+  <%= t('views.quizzes.edit.modal_title') %>
+<% end %>
 
 <%= render 'quizzes/edit_form' %>
-
-<%= link_to 'Вернуться к списку',
-            { :controller => 'quizzes', :action => 'index' },
-            { :class => 'btn btn-default' } %>

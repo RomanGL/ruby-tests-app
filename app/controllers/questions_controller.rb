@@ -1,7 +1,6 @@
-require_relative '../models/quiz'
-require_relative '../models/question'
-
 class QuestionsController < ApplicationController
+  respond_to :html, :json
+
   def index
     @quiz = Quiz.find params[:quiz_id]
     @questions = @quiz.questions.all
@@ -9,7 +8,8 @@ class QuestionsController < ApplicationController
 
   def new
     @quiz = Quiz.find params[:quiz_id]
-    @question = Question.new
+    @question = @quiz.questions.new
+    respond_modal_with @quiz, @question
   end
 
   def create
@@ -17,20 +17,16 @@ class QuestionsController < ApplicationController
     @question = @quiz.questions.new question_params
 
     if @question.save
-      redirect_to quiz_question_path(@quiz, @question)
+      respond_modal_with @quiz, location: quiz_questions_path
     else
-      render 'new'
+      respond_modal_with @quiz, @question, location: new_quiz_question_path
     end
-  end
-
-  def show
-    @quiz = Quiz.find params[:quiz_id]
-    @question = @quiz.questions.find params[:id]
   end
 
   def edit
     @quiz = Quiz.find params[:quiz_id]
     @question = @quiz.questions.find params[:id]
+    respond_modal_with @quiz, @question
   end
 
   def update
@@ -38,9 +34,9 @@ class QuestionsController < ApplicationController
     @question = @quiz.questions.find params[:id]
 
     if @question.update question_params
-      redirect_to quiz_question_path(@quiz, @question)
+      respond_modal_with @quiz, location: quiz_questions_path
     else
-      render 'edit'
+      respond_modal_with @quiz, @question, location: edit_quiz_question_path
     end
   end
 

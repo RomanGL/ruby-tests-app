@@ -1,12 +1,5 @@
-
-<h1>Добавить вопрос к тесту "<%= @quiz.title %>"</h1>
+<% content_for :modal_title do %>
+  <%= t('views.questions.new.modal_title') %>
+<% end %>
 
 <%= render 'questions/edit_form' %>
-
-<%= link_to 'Вернуться к списку вопросов',
-            {
-                :controller => 'questions',
-                :action => 'index',
-                :quiz_id => @quiz.id
-            },
-            { :class => 'btn btn-default' } %>

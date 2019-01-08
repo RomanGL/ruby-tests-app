@@ -1,10 +1,18 @@
+<% content_for :page_title do %>
+  <%= t('views.welcome.page_title') %>
+<% end %>
+
 <div class="jumbotron">
-  <h1 class="display-4">Система тестирования</h1>
-  <p class="lead">Простой и удобный сервис для создания и решения тестов.</p>
+  <h1 class="display-4"><%= t('views.welcome.jumbo_title') %></h1>
+  <p class="lead"><%= t('views.welcome.jumbo_description') %></p>
   <hr class="my-4">
-  <p>Чтобы начать пользоваться сервисом, вам необходимо войти или зарегистрироваться.</p>
+  <p><%= t('views.welcome.jumbo_unauthorized_message') %></p>
   <p class="lead">
-    <a class="btn btn-success btn-lg" href="#" role="button">Войти</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Зарегистрироваться</a>
+    <a class="btn btn-success btn-lg" href="#" role="button">
+      <%= t('views.welcome.sign_in_button') %>
+    </a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">
+      <%= t('views.welcome.sign_up_button') %>
+    </a>
   </p>
 </div>

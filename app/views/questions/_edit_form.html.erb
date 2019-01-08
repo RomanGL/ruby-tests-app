@@ -1,26 +1,38 @@
+<div class="container">
+  <%= form_with(model: [ @quiz, @question ], remote: request.xhr?, html: {data: {modal: true}}) do |form| %>
 
-<%= form_with(model: [ @quiz, @question ], local: true) do |form| %>
+    <% if @question.errors.any? %>
+      <div class="alert alert-danger mt-3" role="alert">
+        <%= t('form_messages.validation_error') %>
+      </div>
+    <% end %>
 
-  <% if @question.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:
-      </h2>
-      <ul>
-        <% @question.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <div class="form-group mt-2">
+      <%= form.label t('views.questions.form.question') %>
+
+      <% if @question.errors.has_key?(:question) %>
+        <%= form.text_field :question,
+                            :class => 'form-control is-invalid',
+                            :placeholder => t('views.questions.form.enter_question') %>
+
+        <div class="invalid-feedback">
+          <% @question.errors.full_messages_for(:question).each do |msg| %>
+            <%= msg %><br>
+          <% end %>
+        </div>
+      <% else %>
+        <%= form.text_field :question,
+                            :class => 'form-control',
+                            :placeholder => t('views.questions.form.enter_question') %>
+        <small class="form-text text-muted">
+          <%= t('form_messages.required_minimum_input_length', count: 5) %>
+        </small>
+      <% end %>
+    </div>
+
+    <div class="modal-footer">
+      <%= form.submit t('views.questions.form.save_button'),
+                      :class => 'btn btn-success' %>
     </div>
   <% end %>
-
-  <p>
-    <%= form.label :'Вопрос' %><br>
-    <%= form.text_field :question %>
-  </p>
-
-  <p>
-    <%= form.submit 'Сохранить вопрос',
-                    :class => 'btn btn-success'%>
-  </p>
-<% end %>
+</div>
