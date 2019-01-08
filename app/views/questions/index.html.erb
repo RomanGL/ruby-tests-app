@@ -7,19 +7,21 @@
   </p>
 </div>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col grow">
-      <h5>Вопросы</h5>
-    </div>
-  </div>
+<table class="table table-hover">
+  <thead class="thead-light">
+  <tr>
+    <th class="w-75">Вопрос</th>
+    <th class="w-25">Действия</th>
+  </tr>
+  </thead>
 
+  <tbody>
   <% @questions.each do |q| %>
-    <div class="row mb-2 align-items-center">
-      <div class="col grow">
-        <h6><%= q.question %></h6>
-      </div>
-      <div class="col-md-auto shrink">
+    <tr>
+      <th class="w-75">
+        <%= q.question %>
+      </th>
+      <th class="w-25">
         <div class="btn-group mt-0 mb-4 my-md-0">
           <%= link_to 'Варианты ответов',
                       {
@@ -39,7 +41,8 @@
                       method: :delete,
                       data: { confirm: 'Вы уверены?' } %>
         </div>
-      </div>
-    </div>
+      </th>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
