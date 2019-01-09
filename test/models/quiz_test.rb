@@ -14,14 +14,14 @@ class QuizTest < ActiveSupport::TestCase
     quiz = Quiz.new title: '1234', description: VALID_DESCRIPTION
 
     assert_not quiz.valid?, 'quiz is valid with too short title'
-    assert quiz.errors.added?(:title, :too_short), 'no validation error for too short title'
+    assert quiz.errors.added?(:title, :too_short), 'no validation errors for too short title'
   end
 
   test 'invalid with too short description' do
     quiz = Quiz.new title: VALID_TITLE, description: '1234'
 
     assert_not quiz.valid?, 'quiz is valid with too short description'
-    assert quiz.errors.added?(:description, :too_short), 'no validation error for too short description'
+    assert quiz.errors.added?(:description, :too_short), 'no validation errors for too short description'
   end
 
   test 'invalid with too long description' do
@@ -33,6 +33,6 @@ class QuizTest < ActiveSupport::TestCase
     quiz = Quiz.new title: VALID_TITLE, description: too_long_description
 
     assert_not quiz.valid?, 'quiz is valid with too long description'
-    assert quiz.errors.added?(:description, :too_long), 'no validation error for too long description'
+    assert quiz.errors.added?(:description, :too_long), 'no validation errors for too long description'
   end
 end

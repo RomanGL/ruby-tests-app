@@ -1,0 +1,24 @@
+<% content_for :page_title do %>
+  <%= t('views.errors.403_page_title') %>
+<% end %>
+
+<div class="full-height d-flex flex-column align-items-center justify-content-center bg-primary">
+  <div class="card" style="width: 18rem;">
+    <div class="card-img-top ml-3 mt-1">
+      <h1 class="display-1 text-primary">
+        403
+      </h1>
+    </div>
+    <div class="card-body pt-0">
+      <h5 class="card-title">
+        <%= t('views.errors.403_page_title') %>
+      </h5>
+      <p class="card-text">
+        <%= t('views.errors.403_description') %>
+      </p>
+      <%= link_to t('views.errors.403_button'),
+                  root_path,
+                  {:class => 'btn btn-primary mt-4'} %>
+    </div>
+  </div>
+</div>

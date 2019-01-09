@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield :page_title %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    .full-height {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <%= yield %>
+</body>
+</html>

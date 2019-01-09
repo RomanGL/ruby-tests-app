@@ -17,20 +17,20 @@ class QuestionTest < ActiveSupport::TestCase
     assert_not question.valid?, 'question is valid with too short question field'
 
     question.errors.add(:question, :too_long)
-    assert question.errors.added?(:question, :too_short), 'no validation error for question field length'
+    assert question.errors.added?(:question, :too_short), 'no validation errors for question field length'
   end
 
   test 'invalid without quiz_id' do
     question = Question.new question: VALID_QUESTION, quiz_id: nil
 
     assert_not question.valid?, 'question is valid without a quiz_id'
-    assert question.errors.added?(:quiz_id, :blank), 'no validation error for quiz_id present'
+    assert question.errors.added?(:quiz_id, :blank), 'no validation errors for quiz_id present'
   end
 
   test 'invalid with non-existent quiz' do
     question = Question.new question: VALID_QUESTION, quiz_id: 255
 
     assert_not question.valid?, 'question is valid with non-existent quiz_id'
-    assert question.errors.added?(:quiz, :blank), 'no validation error for non-existent quiz'
+    assert question.errors.added?(:quiz, :blank), 'no validation errors for non-existent quiz'
   end
 end
