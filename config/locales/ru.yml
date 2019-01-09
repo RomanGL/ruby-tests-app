@@ -38,6 +38,9 @@ ru:
       brand_name: Система тестирования
       home_link: Главная
       quizzes_link: Тесты
+      sign_in_link: Войти
+      sign_up_link: Зарегистрироваться
+      sign_out_link: Выйти
 
     page_navbar:
       home_link: Главная
@@ -48,7 +51,9 @@ ru:
       jumbo_title: Система тестирования
       jumbo_description: Простой и удобный сервис для создания и решения тестов.
       jumbo_unauthorized_message: Чтобы начать пользоваться сервисом, вам необходимо войти или зарегистрироваться.
+      jumbo_authorized_message: Добро пожаловать, %{user_name}!
 
+      quizzes_button: Тесты
       sign_in_button: Войти
       sign_up_button: Зарегистрироваться
 
