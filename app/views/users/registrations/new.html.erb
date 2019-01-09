@@ -10,7 +10,7 @@
                } %>
 
 <div class="container">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
+  <%= form_for(resource, as: resource_name, url: users_sign_up_path) do |form| %>
 
     <% if resource.errors.any? %>
       <div class="alert alert-danger mt-3" role="alert">
