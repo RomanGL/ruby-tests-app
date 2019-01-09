@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
 
   def index
     if cannot? :read, Answer # Список вопросов
-      redirect_to "http://localhost:3000/quizzes/"
+      redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.find params[:quiz_id]
       @question = @quiz.questions.find params[:question_id]
@@ -12,22 +12,22 @@ class AnswersController < ApplicationController
   end
 
   def new
-    @quiz = Quiz.find params[:quiz_id]
-    @question = @quiz.questions.find params[:question_id]
     if cannot? :create, Answer # Создать вопрос
-      redirect_to quiz_question_answers_path(@quiz, @question), danger: 'Вы не можете создать ответ: недостаточно прав' # redirect_to страница ошибки
+      redirect_to "http://localhost:3000/403"
     else
+      @quiz = Quiz.find params[:quiz_id]
+      @question = @quiz.questions.find params[:question_id]
       @answer = @question.answers.new
       respond_modal_with @quiz, @question, @answer
     end
   end
 
   def create
-    @quiz = Quiz.find params[:quiz_id]
-    @question = @quiz.questions.find params[:question_id]
     if cannot? :create, Answer # Создать вопрос
-      redirect_to quiz_question_answers_path(@quiz, @question), danger: 'Вы не можете создать ответ: недостаточно прав' # redirect_to страница ошибки
+      redirect_to "http://localhost:3000/403"
     else
+      @quiz = Quiz.find params[:quiz_id]
+      @question = @quiz.questions.find params[:question_id]
       @answer = @question.answers.new answer_params
 
       if @answer.save
@@ -39,25 +39,23 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    @quiz = Quiz.find params[:quiz_id]
-    @question = @quiz.questions.find params[:question_id]
-    @answer = @question.answers.find params[:id]
     if cannot? :edit, Answer # Создать вопрос
-      redirect_to quiz_question_answers_path(@quiz, @question), danger: 'Вы не можете изменить ответ: недостаточно прав' # redirect_to страница ошибки
+      redirect_to "http://localhost:3000/403"
     else
+      @quiz = Quiz.find params[:quiz_id]
+      @question = @quiz.questions.find params[:question_id]
+      @answer = @question.answers.find params[:id]
       respond_modal_with @quiz, @question, @answer
     end
   end
 
   def update
-    @quiz = Quiz.find params[:quiz_id]
-    @question = @quiz.questions.find params[:question_id]
-    @answer = @question.answers.find params[:id]
-
     if cannot? :edit, Answer # Создать вопрос
-      redirect_to quiz_question_answers_path(@quiz, @question), danger: 'Вы не можете изменить ответ: недостаточно прав' # redirect_to страница ошибки
+      redirect_to "http://localhost:3000/403"
     else
-
+      @quiz = Quiz.find params[:quiz_id]
+      @question = @quiz.questions.find params[:question_id]
+      @answer = @question.answers.find params[:id]
       if @answer.update answer_params
         respond_modal_with @quiz, @question, location: quiz_question_answers_path
       else
@@ -67,13 +65,12 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @quiz = Quiz.find params[:quiz_id]
-    @question = @quiz.questions.find params[:question_id]
-    @answer = @question.answers.find params[:id]
-
     if cannot? :destroy, Answer # Создать вопрос
-      redirect_to quiz_question_answers_path(@quiz, @question), danger: 'Вы не можете удалить ответ: недостаточно прав' # redirect_to страница ошибки
+      redirect_to "http://localhost:3000/403"
     else
+      @quiz = Quiz.find params[:quiz_id]
+      @question = @quiz.questions.find params[:question_id]
+      @answer = @question.answers.find params[:id]
       @answer.destroy
       redirect_to quiz_question_answers_path(@quiz, @question)
     end

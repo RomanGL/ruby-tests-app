@@ -3,7 +3,7 @@ class QuizzesController < ApplicationController
 
   def index
     if cannot? :read, Quiz # Список тестов
-      redirect_to "http://localhost:3000/"
+      redirect_to "http://localhost:3000/403"
     else
       @quizzes = Quiz.all
     end
@@ -11,7 +11,7 @@ class QuizzesController < ApplicationController
 
   def new
     if cannot? :create, Quiz # Создать тест
-	redirect_to quizzes_path, danger: 'Вы не можете создать тест: недостаточно прав' # redirect_to страница ошибки
+	redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.new
       respond_modal_with @quiz
@@ -20,7 +20,7 @@ class QuizzesController < ApplicationController
 
   def edit
      if cannot? :edit, Quiz # Изменить тест
-	redirect_to quizzes_path, danger: 'Вы не можете изменить тест: недостаточно прав' # redirect_to страница ошибки
+	redirect_to "http://localhost:3000/403"
     else
     @quiz = Quiz.find params[:id]
     respond_modal_with @quiz
@@ -29,7 +29,7 @@ class QuizzesController < ApplicationController
 
   def create
     if cannot? :create, Quiz # Создать тест
-	redirect_to quizzes_path, danger: 'Вы не можете создать тест: недостаточно прав' # redirect_to страница ошибки
+	redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.new quiz_params
       if @quiz.save
@@ -42,7 +42,7 @@ class QuizzesController < ApplicationController
 
   def update
     if cannot? :create, Quiz # Изменить тест
-	redirect_to quizzes_path, danger: 'Вы не можете создать тест: недостаточно прав' # redirect_to страница ошибки
+	redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.find params[:id]
 
@@ -56,7 +56,7 @@ class QuizzesController < ApplicationController
 
   def destroy
     if cannot? :destroy, Quiz # Изменить тест
-       redirect_to quizzes_path, danger: 'Вы не можете удалить тест: недостаточно прав' # redirect_to страница ошибки
+       redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.find params[:id]
       @quiz.destroy
