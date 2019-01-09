@@ -4,6 +4,7 @@ ru:
       quiz: Тест
       question: Вопрос
       answer: Ответ на вопрос
+      user: Пользователь
     attributes:
       quiz:
         title: Название
@@ -13,6 +14,11 @@ ru:
       answer:
         title: Ответ
         right: Ответ верный
+      user:
+        name: Имя
+        password: Пароль
+        password_confirmation: Пароль
+        current_password: Текущий пароль
 
   form_messages:
     validation_error: Некоторые поля заполнены неверно.
@@ -38,6 +44,9 @@ ru:
       brand_name: Система тестирования
       home_link: Главная
       quizzes_link: Тесты
+      sign_in_link: Войти
+      sign_up_link: Зарегистрироваться
+      sign_out_link: Выйти
 
     page_navbar:
       home_link: Главная
@@ -48,7 +57,9 @@ ru:
       jumbo_title: Система тестирования
       jumbo_description: Простой и удобный сервис для создания и решения тестов.
       jumbo_unauthorized_message: Чтобы начать пользоваться сервисом, вам необходимо войти или зарегистрироваться.
+      jumbo_authorized_message: Добро пожаловать, %{user_name}!
 
+      quizzes_button: Тесты
       sign_in_button: Войти
       sign_up_button: Зарегистрироваться
 
@@ -113,3 +124,61 @@ ru:
         answer_right: Является верным
         enter_answer: Введите ответ
         save_button: Сохранить ответ
+
+    devise:
+      sessions:
+        new:
+          page_title: Вход
+          jumbo_title: Вход
+          jumbo_description: Чтобы воспользоваться всеми возможностями сервиса, вам необходимо войти.
+
+          email: Email
+          password: Пароль
+          remember: Запомнить
+          enter_email: Введите email
+          enter_password: Введите пароль
+
+          no_account_yet: Нет учетной записи?
+
+          sign_in_button: Войти
+          sign_up_button: Зарегистрироваться
+
+    users:
+      registrations:
+        new:
+          page_title: Регистрация
+          jumbo_title: Регистрация
+          jumbo_description: Чтобы воспользоваться всеми возможностями сервиса, вам необходимо зарегистрироваться.
+
+          already_have_an_account: Уже есть учетная запись?
+
+          sign_in_button: Войти
+          sign_up_button: Зарегистрироваться
+
+        edit:
+          page_title: Изменение профиля
+          jumbo_description: Здесь вы можете обновить информацию о своем профиле.
+
+          remove_account_title: Удалить учетную запись
+          remove_account_description: Согласно пункту 5, статьи 21, Федерального закона от 27 июля 2006 г. N 152-ФЗ "О персональных данных" вы можете в любой момент удалить свою учетную запись.
+
+          update_button: Обновить сведения
+          remove_account_button: Удалить учетную запись
+
+        form:
+          user_name: Имя
+          email: Email
+          password: Пароль
+          password_confirmation: Подтверждение пароля
+          current_password: Текущий пароль
+          new_password: Новый пароль
+
+          leave_new_password_blank: Оставьте поле пустым, если не хотите изменять пароль.
+          current_password_description: Текущий пароль требуется для подтверждения изменений.
+
+          enter_user_name: Введите свое имя
+          enter_email: Введите email
+          enter_password: Введите пароль
+          enter_password_confirmation: Введите пароль повторно
+          enter_current_password: Введите текущий пароль
+          enter_new_password: Введите новый пароль
