@@ -32,10 +32,11 @@
 
     <div class="form-group">
       <div class="form-check">
-      <%= form.check_box :right,
-                         :class => 'form-check-input' %>
-      <%= form.label t('views.answers.form.answer_right'),
-                     :class => 'form-check-label' %>
+        <%= form.check_box :right,
+                           :class => 'form-check-input' %>
+        <%= form.label :right,
+                       t('views.answers.form.answer_right'),
+                       :class => 'form-check-label' %>
       </div>
     </div>
 

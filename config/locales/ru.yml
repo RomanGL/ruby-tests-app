@@ -118,3 +118,21 @@ ru:
         answer_right: Является верным
         enter_answer: Введите ответ
         save_button: Сохранить ответ
+
+    devise:
+      sessions:
+        new:
+          page_title: Вход
+          jumbo_title: Вход
+          jumbo_description: Чтобы воспользоваться всеми возможностями сервиса, вам необходимо войти.
+
+          email: Email
+          password: Пароль
+          remember: Запомнить
+          enter_email: Введите email
+          enter_password: Введите пароль
+
+          no_account_yet: Нет учетной записи?
+
+          sign_in_button: Войти
+          sign_up_button: Зарегистрироваться
