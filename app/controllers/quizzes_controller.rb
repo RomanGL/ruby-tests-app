@@ -11,7 +11,7 @@ class QuizzesController < ApplicationController
 
   def new
     if cannot? :create, Quiz # Создать тест
-	redirect_to "http://localhost:3000/403"
+      redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.new
       respond_modal_with @quiz
@@ -19,17 +19,17 @@ class QuizzesController < ApplicationController
   end
 
   def edit
-     if cannot? :edit, Quiz # Изменить тест
-	redirect_to "http://localhost:3000/403"
+    if cannot? :edit, Quiz # Изменить тест
+      redirect_to "http://localhost:3000/403"
     else
-    @quiz = Quiz.find params[:id]
-    respond_modal_with @quiz
+      @quiz = Quiz.find params[:id]
+      respond_modal_with @quiz
     end
   end
 
   def create
     if cannot? :create, Quiz # Создать тест
-	redirect_to "http://localhost:3000/403"
+      redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.new quiz_params
       if @quiz.save
@@ -42,7 +42,7 @@ class QuizzesController < ApplicationController
 
   def update
     if cannot? :create, Quiz # Изменить тест
-	redirect_to "http://localhost:3000/403"
+      redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.find params[:id]
 
@@ -56,7 +56,7 @@ class QuizzesController < ApplicationController
 
   def destroy
     if cannot? :destroy, Quiz # Изменить тест
-       redirect_to "http://localhost:3000/403"
+      redirect_to "http://localhost:3000/403"
     else
       @quiz = Quiz.find params[:id]
       @quiz.destroy
@@ -68,6 +68,6 @@ class QuizzesController < ApplicationController
 
   def quiz_params
     params.require(:quiz)
-          .permit(:title, :description)
+        .permit(:title, :description)
   end
 end

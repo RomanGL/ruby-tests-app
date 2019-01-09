@@ -68,10 +68,12 @@ ru:
       jumbo_title: Тесты
       jumbo_description: На данной странице представлены все доступные тесты.
 
-      empty_list: Ни одного теста не существует. Создайте свой первый тест!
+      empty_list: Пока нет ни одного теста.
+      empty_list_for_creators: Пока нет ни одного теста. Создайте свой первый тест!
 
       questions_button: Вопросы
       create_button: Создать тест
+      start_test_button: Выполнить
 
       new:
         modal_title: Создать тест
@@ -186,7 +188,9 @@ ru:
 
     errors:
       404_page_title: Не найдено
-      404_description: Вас здесь точно быть не должно.
+      404_description_default: Запрашиваемый вами ресурс не существует.
+      404_button_default: Вернуться на главную
+      404_description: Вам не стоило сюда заходить.
       404_button: Лучше вернитесь на главную.
 
       403_page_title: Доступ запрещен

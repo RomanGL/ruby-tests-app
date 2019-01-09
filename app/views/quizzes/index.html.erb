@@ -16,13 +16,16 @@
 <div class="jumbotron pb-4 pt-2 px-4 mt-0">
   <h1 class="display-4"><%= t('views.quizzes.jumbo_title') %></h1>
   <p class="lead"><%= t('views.quizzes.jumbo_description') %></p>
-  <hr class="my-4">
-  <p class="lead">
-    <%= link_to t('views.quizzes.create_button'),
-                new_quiz_path,
-                class: 'btn btn-primary',
-                data: { modal: true } %>
-  </p>
+
+  <% if can? :create, Quiz %>
+    <hr class="my-4">
+    <p class="lead">
+      <%= link_to t('views.quizzes.create_button'),
+                  new_quiz_path,
+                  class: 'btn btn-primary',
+                  data: {modal: true} %>
+    </p>
+  <% end %>
 </div>
 
 <% if @quizzes.any? %>
@@ -46,22 +49,33 @@
         </td>
         <td class="w-25">
           <div class="btn-group mt-2 mb-4 my-md-0">
-            <%= link_to t('views.quizzes.questions_button'),
-                        {
-                            :controller => 'questions',
-                            :action => 'index' ,
-                            :quiz_id => quiz.id
-                        },
-                        { :class => 'btn btn-primary' } %>
-            <%= link_to t('views.common.edit_button'),
-                        edit_quiz_path(quiz),
-                        class: 'btn btn-success',
-                        data: { modal: true } %>
-            <%= link_to t('views.common.remove_button'),
-                        quiz_path(quiz),
-                        class: 'btn btn-danger',
-                        method: :delete,
-                        data: { confirm: t('views.common.are_you_sure_message') } %>
+            <% if can? :read, Quiz %>
+              <%= link_to t('views.quizzes.start_test_button'),
+                          '/404',
+                          {:class => 'btn btn-primary'} %>
+            <% end %>
+            <% if can? :read, Question %>
+              <%= link_to t('views.quizzes.questions_button'),
+                          {
+                              :controller => 'questions',
+                              :action => 'index',
+                              :quiz_id => quiz.id
+                          },
+                          {:class => 'btn btn-primary'} %>
+            <% end %>
+            <% if can? :edit, Quiz %>
+              <%= link_to t('views.common.edit_button'),
+                          edit_quiz_path(quiz),
+                          class: 'btn btn-success',
+                          data: {modal: true} %>
+            <% end %>
+            <% if can? :destroy, Question %>
+              <%= link_to t('views.common.remove_button'),
+                          quiz_path(quiz),
+                          class: 'btn btn-danger',
+                          method: :delete,
+                          data: {confirm: t('views.common.are_you_sure_message')} %>
+            <% end %>
           </div>
         </td>
       </tr>
@@ -70,7 +84,11 @@
   </table>
 <% else %>
   <div class="alert alert-info my-3 mx-3" role="alert">
-    <%= t('views.quizzes.empty_list') %>
+    <% if can? :create, Quiz %>
+      <%= t('views.quizzes.empty_list_for_creators') %>
+    <% else %>
+      <%= t('views.quizzes.empty_list') %>
+    <% end %>
   </div>
 <% end %>
 
