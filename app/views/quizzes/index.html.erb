@@ -51,7 +51,7 @@
           <div class="btn-group mt-2 mb-4 my-md-0">
             <% if can? :read, Quiz %>
               <%= link_to t('views.quizzes.start_test_button'),
-                          '/404',
+                          perform_quiz_path(quiz),
                           {:class => 'btn btn-primary'} %>
             <% end %>
             <% if can? :read, Question %>

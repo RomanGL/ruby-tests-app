@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   match "/404", :to => "errors#not_found", :via => :all
   match "/403", :to => "errors#forbidden", :via => :all
   match "/500", :to => "errors#internal_server_error", :via => :all
+
   devise_for :users, controllers: {registrations: 'users/registrations'}
 
   devise_scope :user do
@@ -13,6 +14,9 @@ Rails.application.routes.draw do
   end
 
   get 'welcome/index'
+
+  get 'quizzes/:id', :to => 'quizzes#perform', :as => 'perform_quiz'
+  post 'quizzes/:id', :to => 'quizzes#finish'
 
   resources :quizzes, only: [ :index, :new, :edit, :create, :update, :destroy ] do
     resources :questions, only: [ :index, :new, :edit, :create, :update, :destroy ] do
