@@ -20,7 +20,7 @@ class AnswerTest < ActiveSupport::TestCase
                         question_id: VALID_QUESTION_ID
 
     assert_not answer.valid?, 'answer is valid without title'
-    assert answer.errors.added?(:title, :blank), 'no validation error for answer title present'
+    assert answer.errors.added?(:title, :blank), 'no validation errors for answer title present'
   end
 
   test 'invalid without question_id' do
@@ -29,7 +29,7 @@ class AnswerTest < ActiveSupport::TestCase
                         question_id: nil
 
     assert_not answer.valid?, 'answer is valid without question_id'
-    assert answer.errors.added?(:question_id, :blank), 'no validation error for question_id present'
+    assert answer.errors.added?(:question_id, :blank), 'no validation errors for question_id present'
   end
 
   test 'invalid with non-existent question' do
@@ -38,6 +38,6 @@ class AnswerTest < ActiveSupport::TestCase
                         question_id: 255
 
     assert_not answer.valid? 'answer is valid with non-existent question'
-    assert answer.errors.added?(:question, :blank), 'no validation error for non-existent question'
+    assert answer.errors.added?(:question, :blank), 'no validation errors for non-existent question'
   end
 end
