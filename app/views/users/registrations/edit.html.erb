@@ -1,48 +1,166 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-</div>
-
-<div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-</div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+<% content_for :page_title do %>
+  <%= t('views.users.registrations.edit.page_title') %>>
 <% end %>
 
-<h3>Cancel my account</h3>
+<%= render :partial => 'layouts/simple_jumbotron',
+           :locals =>
+               {
+                   :jumbo_title => current_user.name,
+                   :jumbo_description => t('views.users.registrations.edit.jumbo_description')
+               } %>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<div class="container mb-5">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
 
-<%= link_to "Back", :back %>
+    <% if resource.errors.any? %>
+      <div class="alert alert-danger mt-3" role="alert">
+        <%= t('form_messages.validation_error') %>
+      </div>
+    <% end %>
+
+    <div class="form-row mt-2">
+      <div class="form-group col-6">
+        <%= form.label t('views.users.registrations.form.user_name') %>
+
+        <% if resource.errors.has_key?(:name) %>
+          <%= form.text_field :name,
+                              :class => 'form-control is-invalid',
+                              :autofocus => true,
+                              :placeholder => t('views.users.registrations.form.enter_user_name') %>
+
+          <div class="invalid-feedback">
+            <% resource.errors.full_messages_for(:name).each do |msg| %>
+              <%= msg %><br>
+            <% end %>
+          </div>
+        <% else %>
+          <%= form.text_field :name,
+                              :class => 'form-control',
+                              :autofocus => true,
+                              :placeholder => t('views.users.registrations.form.enter_user_name') %>
+        <% end %>
+
+      </div>
+
+      <div class="form-group col-6">
+        <%= form.label t('views.users.registrations.form.email') %>
+        <% if resource.errors.has_key?(:email) %>
+          <%= form.email_field :email,
+                               :class => 'form-control is-invalid',
+                               :autocomplete => 'email',
+                               :placeholder => t('views.users.registrations.form.enter_email') %>
+
+          <div class="invalid-feedback">
+            <% resource.errors.full_messages_for(:email).each do |msg| %>
+              <%= msg %><br>
+            <% end %>
+          </div>
+        <% else %>
+          <%= form.email_field :email,
+                               :class => 'form-control',
+                               :autocomplete => 'email',
+                               :placeholder => t('views.users.registrations.form.enter_email') %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-row mt-2">
+      <div class="form-group col-6">
+        <%= form.label t('views.users.registrations.form.new_password') %>
+
+        <% if resource.errors.has_key?(:password) %>
+          <%= form.password_field :password,
+                                  :class => 'form-control is-invalid',
+                                  :placeholder => t('views.users.registrations.form.enter_new_password') %>
+
+          <div class="invalid-feedback">
+            <% resource.errors.full_messages_for(:password).each do |msg| %>
+              <%= msg %><br>
+            <% end %>
+          </div>
+        <% else %>
+          <%= form.password_field :password,
+                                  :class => 'form-control',
+                                  :placeholder => t('views.users.registrations.form.enter_new_password') %>
+          <% if @minimum_password_length %>
+            <small class="form-text text-muted">
+              <%= t('form_messages.required_minimum_input_length', count: @minimum_password_length) %>
+            </small>
+          <% end %>
+        <% end %>
+
+        <small class="form-text text-info">
+          <%= t('views.users.registrations.form.leave_new_password_blank') %>
+        </small>
+      </div>
+
+      <div class="form-group col-6">
+        <%= form.label t('views.users.registrations.form.password_confirmation') %>
+
+        <% if resource.errors.has_key?(:password_confirmation) %>
+          <%= form.password_field :password_confirmation,
+                                  :class => 'form-control is-invalid',
+                                  :placeholder => t('views.users.registrations.form.enter_password_confirmation') %>
+
+          <div class="invalid-feedback">
+            <% resource.errors.full_messages_for(:password_confirmation).each do |msg| %>
+              <%= msg %><br>
+            <% end %>
+          </div>
+        <% else %>
+          <%= form.password_field :password_confirmation,
+                                  :class => 'form-control',
+                                  :placeholder => t('views.users.registrations.form.enter_password_confirmation') %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('views.users.registrations.form.current_password') %>
+
+      <% if resource.errors.has_key?(:current_password) %>
+        <%= form.password_field :current_password,
+                                :class => 'form-control is-invalid',
+                                :autocomplete => 'current-password',
+                                :placeholder => t('views.users.registrations.form.enter_current_password') %>
+
+        <div class="invalid-feedback">
+          <% resource.errors.full_messages_for(:current_password).each do |msg| %>
+            <%= msg %><br>
+          <% end %>
+        </div>
+      <% else %>
+        <%= form.password_field :current_password,
+                                :class => 'form-control',
+                                :autocomplete => 'current-password',
+                                :placeholder => t('views.users.registrations.form.enter_current_password') %>
+      <% end %>
+
+      <small class="form-text text-info">
+        <%= t('views.users.registrations.form.current_password_description') %>
+      </small>
+    </div>
+
+    <div class="form_group">
+      <%= form.submit t('views.users.registrations.edit.update_button'),
+                      :class => 'btn btn-success' %>
+    </div>
+  <% end %>
+
+  <hr class="my-4">
+  <div>
+    <h5>
+      <%= t('views.users.registrations.edit.remove_account_title') %>
+    </h5>
+    <small class="text-info">
+      <%= t('views.users.registrations.edit.remove_account_description') %>
+    </small>
+    <p class="lead">
+      <%= link_to t('views.users.registrations.edit.remove_account_button'),
+                  registration_path(resource_name),
+                  :class => 'btn btn-danger mt-4',
+                  :method => :delete,
+                  :data => {confirm: t('views.common.are_you_sure_message')} %>
+    </p>
+  </div>
+</div>
