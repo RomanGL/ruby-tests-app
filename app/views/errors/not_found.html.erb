@@ -2,7 +2,7 @@
   <%= t('views.errors.404_page_title') %>
 <% end %>
 
-<!--<div class="full-height d-flex flex-column align-items-center justify-content-center bg-dark">
+<div class="full-height d-flex flex-column align-items-center justify-content-center bg-dark">
   <div class="card" style="width: 18rem;">
     <div class="card-img-top ml-3 mt-1">
       <h1 class="display-1 text-dark">
@@ -10,18 +10,20 @@
       </h1>
     </div>
     <div class="card-body pt-0">
-      <h5 class="card-title">Не найдено</h5>
+      <h5 class="card-title">
+        <%= t('views.errors.404_page_title') %>
+      </h5>
       <p class="card-text">
-        Запрашиваемый вами ресурс не существует.
+        <%= t('views.errors.404_description_default') %>
       </p>
-      <%= link_to 'Вернуться на главную',
+      <%= link_to t('views.errors.404_button_default'),
                   root_path,
                   {:class => 'btn btn-dark mt-4'} %>
     </div>
   </div>
-</div>-->
+</div>
 
-<style>
+<!--<style>
   html, body {
     padding: 0;
     margin: 0;
@@ -94,14 +96,14 @@
   <div></div>
   <canvas></canvas>
   <h1>
-    <%= t('views.errors.404_description') %>
+    <%#= t('views.errors.404_description') %>
     <%= link_to t('views.errors.404_button'),
                 root_path,
                 class: 'text-primary' %>
   </h1>
-</div>
+</div>-->
 
-<script>
+<!--<script>
 
     /**
      * Copyright (C) 2016 Hakim El Hattab, http://hakim.se
@@ -423,4 +425,4 @@
             };
     })();
 
-</script>
+</script>-->
