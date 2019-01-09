@@ -11,9 +11,9 @@
     <div>
       <p><%= t('views.welcome.jumbo_authorized_message', user_name: current_user.name) %></p>
       <p class="lead">
-        <a class="btn btn-success btn-lg" href="#" role="button">
-          <%= t('views.welcome.quizzes_button') %>
-        </a>
+        <%= link_to t('views.welcome.quizzes_button'),
+                    quizzes_path,
+                    { :class => 'btn btn-success btn-lg' } %>
       </p>
     </div>
   <% else %>

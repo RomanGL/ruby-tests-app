@@ -2,10 +2,12 @@
   <%= t('views.devise.sessions.new.page_title') %>
 <% end %>
 
-<div class="jumbotron py-5">
-  <h1 class="display-4 text-center"><%= t('views.devise.sessions.new.jumbo_title') %></h1>
-  <p class="lead text-center"><%= t('views.devise.sessions.new.jumbo_description') %></p>
-</div>
+<%= render :partial => 'layouts/simple_jumbotron',
+           :locals =>
+               {
+                   :jumbo_title => t('views.devise.sessions.new.jumbo_title'),
+                   :jumbo_description => t('views.devise.sessions.new.jumbo_description')
+               } %>
 
 <div class="container">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
@@ -47,7 +49,7 @@
       </div>
     <% end %>
 
-    <div class="actions">
+    <div class="form_group">
       <%= form.submit t('views.devise.sessions.new.sign_in_button'),
                       :class => 'btn btn-success px-5' %>
     </div>
