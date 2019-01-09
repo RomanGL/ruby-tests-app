@@ -22,6 +22,8 @@ class Ability
       can :manage, :all
     elsif user.has_role? :student
       can :read, :all
+      cannot :read, Answer
+      cannot :read, Question
     end
   end
 end
