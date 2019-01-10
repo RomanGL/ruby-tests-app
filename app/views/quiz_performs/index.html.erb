@@ -1,0 +1,157 @@
+<% content_for :page_title do %>
+  <%= t('views.quiz_performs.page_title', quiz_title: @quiz.title) %>
+<% end %>
+
+<nav>
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.home_link'), root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.quizzes_link'), quizzes_path %>
+    </li>
+    <li class="breadcrumb-item active"><%= truncate(@quiz.title, length: 20) %></li>
+  </ol>
+</nav>
+
+<div class="jumbotron pb-4 pt-2 px-4 mt-0">
+  <h1 class="display-4"><%= @quiz.title %></h1>
+  <p class="lead"><%= @quiz.description %></p>
+
+  <% if @quiz_successful %>
+    <h4>
+      <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
+    </h4>
+  <% else %>
+    <h4>
+      <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
+    </h4>
+    <hr class="my-4">
+    <p class="lead">
+      <%= link_to t("views.quiz_performs.perform_test_button"),
+                  new_quiz_perform_path,
+                  class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+</div>
+
+<div class="container-fluid mx-auto">
+
+  <% if @view_data[:current_user].any? %>
+    <% unless @view_data[:other_users].nil? %>
+      <h5><%= t('views.quiz_performs.your_performs') %></h5>
+    <% end %>
+
+    <table class="table table-hover table-sm">
+      <thead class="thead-light">
+      <tr>
+        <th class="w-50"><%= t('views.quiz_performs.perform_date') %></th>
+        <th class="w-25"><%= t('views.quiz_performs.perform_result') %></th>
+        <th class="w-25"><%= t('views.common.actions') %></th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <% @view_data[:current_user].each do |data_item| %>
+        <tr>
+          <td class="w-50">
+            <%= l(data_item[:perform].created_at.localtime, format: :long) %>
+          </td>
+          <td class="w-25">
+            <% if data_item[:success] %>
+              <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
+            <% else %>
+              <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
+            <% end %>
+          </td>
+          <td class="w-25">
+            <div class="btn-group mt-2 mb-4 my-md-0">
+              <%= link_to t('views.quiz_performs.perform_details_button'),
+                          quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
+                          class: 'btn btn-primary btn-sm' %>
+              <% if can? :destroy, QuizPerform %>
+                <%= link_to t('views.common.remove_button'),
+                            quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
+                            class: 'btn btn-danger btn-sm',
+                            method: :delete,
+                            data: {confirm: t('views.common.are_you_sure_message')} %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-info my-3 mx-3" role="alert">
+      <%= t('views.quiz_performs.your_performs_empty') %>
+    </div>
+  <% end %>
+
+  <% unless @view_data[:other_users].nil? %>
+    <% if @view_data[:other_users].any? %>
+      <% @view_data[:other_users].each_value do |user_performs| %>
+        <h5 class="mt-4">
+          <%= user_performs[:user].name %>
+          <% if user_performs[:success] %>
+            <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
+          <% else %>
+            <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
+          <% end %>
+        </h5>
+
+        <table class="table table-hover table-sm">
+          <thead class="thead-light">
+          <tr>
+            <th class="w-50"><%= t('views.quiz_performs.perform_date') %></th>
+            <th class="w-25"><%= t('views.quiz_performs.perform_result') %></th>
+            <th class="w-25"><%= t('views.common.actions') %></th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <% user_performs[:performs].each do |perform| %>
+            <tr>
+              <td class="w-50">
+                <%= l(perform[:perform].created_at.localtime, format: :long) %>
+              </td>
+              <td class="w-25">
+                <% if perform[:success] %>
+                  <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
+                <% else %>
+                  <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
+                <% end %>
+              </td>
+              <td class="w-25">
+                <div class="btn-group mt-2 mb-4 my-md-0">
+                  <%= link_to t('views.quiz_performs.perform_details_button'),
+                              quiz_perform_path({quiz_id: @quiz.id, perform_id: perform[:perform].id}),
+                              class: 'btn btn-primary btn-sm' %>
+                  <% if can? :destroy, QuizPerform %>
+                    <%= link_to t('views.common.remove_button'),
+                                quiz_perform_path({quiz_id: @quiz.id, perform_id: perform[:perform].id}),
+                                class: 'btn btn-danger btn-sm',
+                                method: :delete,
+                                data: {confirm: t('views.common.are_you_sure_message')} %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+
+          </tbody>
+        </table>
+      <% end %>
+
+
+    <% else %>
+      <div class="alert alert-warning my-3 mx-3" role="alert">
+        <%= t('views.quiz_performs.other_users_performs_empty') %>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>

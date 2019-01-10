@@ -1,0 +1,65 @@
+<% content_for :page_title do %>
+  <%= t('views.quiz_performs.new.page_title', quiz_title: @quiz.title) %>
+<% end %>
+
+<nav>
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.home_link'),
+                  root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.quizzes_link'),
+                  quizzes_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to truncate(@quiz.title, length: 20),
+                  quiz_performs_path({:quiz_id => @quiz.id}) %>
+    </li>
+    <li class="breadcrumb-item active">
+      <%= t('views.page_navbar.quiz_performing') %>
+    </li>
+  </ol>
+</nav>
+
+<div class="jumbotron pb-4 pt-2 px-4 mt-0">
+  <h1 class="display-4"><%= t('views.quiz_performs.new.jumbo_title') %></h1>
+  <p class="lead"><%= @quiz.title %></p>
+  <hr class="my-4">
+  <p>
+    <%= t('views.quiz_performs.new.jumbo_hint') %>
+  </p>
+</div>
+
+<div class="container">
+  <%= form_for(:result, url: quiz_performs_path) do |f| %>
+
+    <% @questions.each do |question| %>
+      <div class="card mb-4">
+        <div class="card-img-top ml-3 mt-1">
+          <h1 class="display-4 text-primary">
+            <%= question.question %>
+          </h1>
+        </div>
+        <div class="card-body pt-0">
+          <p class="card-title text-secondary">
+            <%= t('views.quiz_performs.new.answers') %>
+          </p>
+
+          <%= collection_check_boxes(:result, question.id, question.answers.all, :id, :title) do |b| %>
+            <div class="form-check">
+              <%= b.check_box :class => 'form-check-input' %>
+              <%= b.label :class => 'form-check-label' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="form_group">
+      <%= f.submit t('views.quiz_performs.new.complete_quiz_button'),
+                   :class => 'btn btn-success my-4' %>
+    </div>
+
+  <% end %>
+</div>

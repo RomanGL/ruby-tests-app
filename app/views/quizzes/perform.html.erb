@@ -1,0 +1,33 @@
+<h1>
+  <%= @quiz.title %>
+</h1>
+
+<%= form_for(:result, url: perform_quiz_path) do |f| %>
+
+  <% @questions.each do |question| %>
+
+    <!-- question title -->
+    <h3><%= f.label question.question %></h3>
+
+    <!-- questions answers -->
+    <ul>
+      <% question.answers.all.each do |answer| %>
+
+        <!-- use display:inline-block or float to make inline li -->
+        <li>
+          <%= f.label answer.title %>
+          <%= f.radio_button(question.id, answer.id) do %>
+            <%= answer.title %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+  <% end %>
+
+  <!-- submit -->
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

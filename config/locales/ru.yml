@@ -51,6 +51,8 @@ ru:
     page_navbar:
       home_link: Главная
       quizzes_link: Тесты
+      quiz_perform_result_link: Результат
+      quiz_performing: Выполнение
 
     welcome:
       page_title: Главная - Система тестирования
@@ -73,7 +75,7 @@ ru:
 
       questions_button: Вопросы
       create_button: Создать тест
-      start_test_button: Выполнить
+      quiz_progress_button: Прогресс
 
       new:
         modal_title: Создать тест
@@ -185,6 +187,40 @@ ru:
           enter_current_password: Введите текущий пароль
           enter_new_password: Введите новый пароль
 
+    quiz_performs:
+      page_title: Прогресс в тесте "%{quiz_title}"
+
+      badge_quiz_success: Тест пройден успешно
+      badge_quiz_failed: Тест не пройден
+
+      perform_test_button: Выполнить тест
+      perform_details_button: Подробнее
+      your_performs: Ваши попытки
+
+      perform_date: Дата попытки
+      perform_result: Результат
+
+      your_performs_empty: Вы еще ни разу не выполнили этот тест.
+      other_users_performs_empty: Другие пользователи еще не выполняли этот тест.
+
+      show:
+        page_title: Результаты теста "%{quiz_title}"
+        jumbo_title: Результаты теста
+
+        badge_answer_valid: Верно
+        badge_ansswer_invalid: Неверно
+
+        question: Вопрос
+        your_answer: Ваш ответ
+        answer_result: Результат
+
+      new:
+        page_title: Выполнение теста "%{quiz_title}"
+        jumbo_title: Решите тест
+        jumbo_hint: Отметьте флажками правильные варианты ответов.
+        answers: Варианты ответов
+
+        complete_quiz_button: Завершить тест
 
     errors:
       404_page_title: Не найдено
