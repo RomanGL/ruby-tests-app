@@ -17,19 +17,55 @@
 <div class="jumbotron pb-4 pt-2 px-4 mt-0">
   <h1 class="display-4"><%= @quiz.title %></h1>
   <p class="lead"><%= @quiz.description %></p>
-  <hr class="my-4">
-  <p class="lead">
-    <%= link_to 'Выполнить тест',
-                new_quiz_perform_path,
-                class: 'btn btn-primary' %>
-  </p>
+
+  <% if @quiz_successful %>
+    <h4><span class="badge badge-success">Тест пройден успешно</span></h4>
+  <% else %>
+    <h4><span class="badge badge-danger">Тест не пройден</span></h4>
+    <hr class="my-4">
+    <p class="lead">
+      <%= link_to 'Выполнить тест',
+                  new_quiz_perform_path,
+                  class: 'btn btn-primary' %>
+    </p>
+  <% end %>
 </div>
 
-<% if @performs.any? %>
-  <% @performs.each do |perform| %>
-    ID = <%= perform.id %><br>
-    QuizID = <%= perform.quiz_id %><br>
-  <% end %>
+<% if @view_data.any? %>
+
+  <table class="table table-hover table-sm">
+    <thead class="thead-light">
+    <tr>
+      <th class="w-50">Дата попытки</th>
+      <th class="w-25">Результат</th>
+      <th class="w-25">Действия</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <% @view_data.each do |data_item| %>
+      <tr>
+        <td class="w-50">
+          <%= l(data_item[:perform].created_at.localtime, format: :long) %>
+        </td>
+        <td class="w-25">
+          <% if data_item[:success] %>
+            <span class="badge badge-success">Верно</span>
+          <% else %>
+            <span class="badge badge-danger">Неверно</span>
+          <% end %>
+        </td>
+        <td class="w-25">
+          <%= link_to 'Подробнее',
+                      show_quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
+                      class: 'btn btn-primary' %>
+        </td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
 <% else %>
   <div class="alert alert-info my-3 mx-3" role="alert">
     Вы еще ни разу не выполнили этот тест.
