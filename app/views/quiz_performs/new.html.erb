@@ -1,0 +1,58 @@
+<% content_for :page_title do %>
+  QuizPerforms#new
+<% end %>
+
+<nav>
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.home_link'),
+                  root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.quizzes_link'),
+                  quizzes_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to truncate(@quiz.title, length: 20),
+                  quiz_performs_path({:quiz_id => @quiz.id}) %>
+    </li>
+    <li class="breadcrumb-item active">
+      Выполнение
+    </li>
+  </ol>
+</nav>
+
+<div class="jumbotron pb-4 pt-2 px-4 mt-0">
+  <h1 class="display-4">Решите тест</h1>
+  <p class="lead"><%= @quiz.title %></p>
+  <hr class="my-4">
+  <p>
+    Отметьте флажками правильные варинты ответов.
+  </p>
+</div>
+
+<%= form_for(:result, url: quiz_performs_path) do |f| %>
+
+  <% @questions.each do |question| %>
+
+    <!-- question title -->
+    <h3><%= f.label question.question %></h3>
+
+    <ul>
+      <!-- questions answers -->
+      <%= collection_check_boxes(:result, question.id, question.answers.all, :id, :title) do |b| %>
+        <li>
+          <%= b.label %>
+          <%= b.check_box %>
+        </li>
+      <% end %>
+    </ul>
+
+  <% end %>
+
+  <!-- submit -->
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

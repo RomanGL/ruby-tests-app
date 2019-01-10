@@ -1,0 +1,88 @@
+<% content_for :page_title do %>
+  QuizPerforms#show
+<% end %>
+
+<nav>
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.home_link'),
+                  root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to t('views.page_navbar.quizzes_link'),
+                  quizzes_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to truncate(@quiz.title, length: 20),
+                  quiz_performs_path({:quiz_id => @quiz.id}) %>
+    </li>
+    <li class="breadcrumb-item active">
+      Результат
+    </li>
+  </ol>
+</nav>
+
+<div class="jumbotron pb-4 pt-2 px-4 mt-0">
+  <h1 class="display-4">
+    Результаты теста
+  </h1>
+  <p class="lead"><%= @quiz.title %></p>
+  <h4>
+    <% if @successful %>
+      <span class="badge badge-success">Верно</span>
+    <% else %>
+      <span class="badge badge-danger">Неверно</span>
+    <% end %>
+  </h4>
+</div>
+
+
+<table class="table table-hover table-sm">
+  <thead class="thead-light">
+  <tr>
+    <th class="w-50">Вопрос</th>
+    <th class="w-25">Ваш ответ</th>
+    <th class="w-25">Результат</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <% @view_data.each do |question_result| %>
+    <tr>
+      <td class="w-50">
+        <%= question_result[:question].question %>
+      </td>
+
+      <td class="w-25">
+        <ul class="comma-list">
+          <% question_result[:user_answers].each do |answer| %>
+            <% if answer.right %>
+              <li class="d-inline text-success font-weight-bold">
+                <%= answer.title %>
+              </li>
+            <% else %>
+              <li class="d-inline text-danger font-weight-bold">
+                <%= answer.title %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </td>
+
+      <td class="w-25">
+        <% if question_result[:user_right_count] == question_result[:right_count] %>
+          <p class="d-inline text-success font-weight-bold">
+            <%= question_result[:user_right_count] %>/<%= question_result[:right_count] %>
+          </p>
+        <% else %>
+          <p class="d-inline text-danger font-weight-bold">
+            <%= question_result[:user_right_count] %>/<%= question_result[:right_count] %>
+          </p>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>

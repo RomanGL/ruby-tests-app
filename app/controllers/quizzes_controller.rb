@@ -64,17 +64,6 @@ class QuizzesController < ApplicationController
     end
   end
 
-  # GET /quizzes/:id
-  def perform
-    @quiz = Quiz.find params[:id]
-    @questions = @quiz.questions.all
-  end
-
-  # POST /quizzes/:id
-  def finish
-    redirect_to '/403'
-  end
-
   private
 
   def quiz_params
