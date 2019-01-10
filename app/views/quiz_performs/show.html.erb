@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  QuizPerforms#show
+  <%= t('views.quiz_performs.show.page_title', quiz_title: @quiz.title) %>
 <% end %>
 
 <nav>
@@ -17,21 +17,21 @@
                   quiz_performs_path({:quiz_id => @quiz.id}) %>
     </li>
     <li class="breadcrumb-item active">
-      Результат
+      <%= t('views.page_navbar.quiz_perform_result_link') %>
     </li>
   </ol>
 </nav>
 
 <div class="jumbotron pb-4 pt-2 px-4 mt-0">
   <h1 class="display-4">
-    Результаты теста
+    <%= t('views.quiz_performs.show.jumbo_title') %>
   </h1>
   <p class="lead"><%= @quiz.title %></p>
   <h4>
     <% if @successful %>
-      <span class="badge badge-success">Верно</span>
+      <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
     <% else %>
-      <span class="badge badge-danger">Неверно</span>
+      <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
     <% end %>
   </h4>
 </div>
@@ -40,9 +40,9 @@
 <table class="table table-hover table-sm">
   <thead class="thead-light">
   <tr>
-    <th class="w-50">Вопрос</th>
-    <th class="w-25">Ваш ответ</th>
-    <th class="w-25">Результат</th>
+    <th class="w-50"><%= t('views.quiz_performs.show.question') %></th>
+    <th class="w-25"><%= t('views.quiz_performs.show.your_answer') %></th>
+    <th class="w-25"><%= t('views.quiz_performs.show.answer_result') %></th>
   </tr>
   </thead>
 

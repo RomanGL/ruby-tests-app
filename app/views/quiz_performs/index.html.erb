@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  QuizPerforms#index
+  <%= t('views.quiz_performs.page_title', quiz_title: @quiz.title) %>
 <% end %>
 
 <nav>
@@ -19,12 +19,16 @@
   <p class="lead"><%= @quiz.description %></p>
 
   <% if @quiz_successful %>
-    <h4><span class="badge badge-success">Тест пройден успешно</span></h4>
+    <h4>
+      <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
+    </h4>
   <% else %>
-    <h4><span class="badge badge-danger">Тест не пройден</span></h4>
+    <h4>
+      <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
+    </h4>
     <hr class="my-4">
     <p class="lead">
-      <%= link_to 'Выполнить тест',
+      <%= link_to t("views.quiz_performs.perform_test_button"),
                   new_quiz_perform_path,
                   class: 'btn btn-primary' %>
     </p>
@@ -33,15 +37,15 @@
 
 <% if @view_data[:current_user].any? %>
   <% unless @view_data[:other_users].nil? %>
-    <h5 class="ml-4">Ваши попытки</h5>
+    <h5 class="ml-4"><%= t('views.quiz_performs.your_performs') %></h5>
   <% end %>
 
   <table class="table table-hover table-sm">
     <thead class="thead-light">
     <tr>
-      <th class="w-50">Дата попытки</th>
-      <th class="w-25">Результат</th>
-      <th class="w-25">Действия</th>
+      <th class="w-50"><%= t('views.quiz_performs.perform_date') %></th>
+      <th class="w-25"><%= t('views.quiz_performs.perform_result') %></th>
+      <th class="w-25"><%= t('views.common.actions') %></th>
     </tr>
     </thead>
 
@@ -54,14 +58,14 @@
         </td>
         <td class="w-25">
           <% if data_item[:success] %>
-            <span class="badge badge-success">Верно</span>
+            <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
           <% else %>
-            <span class="badge badge-danger">Неверно</span>
+            <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
           <% end %>
         </td>
         <td class="w-25">
           <div class="btn-group mt-2 mb-4 my-md-0">
-            <%= link_to 'Подробнее',
+            <%= link_to t('views.quiz_performs.perform_details_button'),
                         quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
                         class: 'btn btn-primary btn-sm' %>
             <% if can? :destroy, QuizPerform %>
@@ -80,7 +84,7 @@
   </table>
 <% else %>
   <div class="alert alert-info my-3 mx-3" role="alert">
-    Вы еще ни разу не выполнили этот тест.
+    <%= t('views.quiz_performs.your_performs_empty') %>
   </div>
 <% end %>
 
@@ -90,18 +94,18 @@
       <h5 class="ml-4 mt-4">
         <%= user_performs[:user].name %>
         <% if user_performs[:success] %>
-          <span class="badge badge-success">Тест пройден успешно</span>
+          <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
         <% else %>
-          <span class="badge badge-danger">Тест не пройден</span>
+          <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
         <% end %>
       </h5>
 
       <table class="table table-hover table-sm">
         <thead class="thead-light">
         <tr>
-          <th class="w-25">Дата попытки</th>
-          <th class="w-25">Результат</th>
-          <th class="w-25">Действия</th>
+          <th class="w-50"><%= t('views.quiz_performs.perform_date') %></th>
+          <th class="w-25"><%= t('views.quiz_performs.perform_result') %></th>
+          <th class="w-25"><%= t('views.common.actions') %></th>
         </tr>
         </thead>
 
@@ -114,14 +118,14 @@
             </td>
             <td class="w-25">
               <% if perform[:success] %>
-                <span class="badge badge-success">Верно</span>
+                <span class="badge badge-success"><%= t('views.quiz_performs.badge_quiz_success') %></span>
               <% else %>
-                <span class="badge badge-danger">Неверно</span>
+                <span class="badge badge-danger"><%= t('views.quiz_performs.badge_quiz_failed') %></span>
               <% end %>
             </td>
             <td class="w-25">
               <div class="btn-group mt-2 mb-4 my-md-0">
-                <%= link_to 'Подробнее',
+                <%= link_to t('views.quiz_performs.perform_details_button'),
                             quiz_perform_path({quiz_id: @quiz.id, perform_id: perform[:perform].id}),
                             class: 'btn btn-primary btn-sm' %>
                 <% if can? :destroy, QuizPerform %>
@@ -143,7 +147,7 @@
 
   <% else %>
     <div class="alert alert-warning my-3 mx-3" role="alert">
-      Другие пользователи еще не выполняли этот тест.
+      <%= t('views.quiz_performs.other_users_performs_empty') %>
     </div>
   <% end %>
 <% end %>
