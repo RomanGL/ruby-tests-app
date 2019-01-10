@@ -52,6 +52,7 @@ ru:
       home_link: Главная
       quizzes_link: Тесты
       quiz_perform_result_link: Результат
+      quiz_performing: Выполнение
 
     welcome:
       page_title: Главная - Система тестирования
@@ -212,6 +213,14 @@ ru:
         question: Вопрос
         your_answer: Ваш ответ
         answer_result: Результат
+
+      new:
+        page_title: Выполнение теста "%{quiz_title}"
+        jumbo_title: Решите тест
+        jumbo_hint: Отметьте флажками правильные варианты ответов.
+        answers: Варианты ответов
+
+        complete_quiz_button: Завершить тест
 
     errors:
       404_page_title: Не найдено

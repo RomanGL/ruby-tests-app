@@ -36,53 +36,54 @@
   </h4>
 </div>
 
-
-<table class="table table-hover table-sm">
-  <thead class="thead-light">
-  <tr>
-    <th class="w-50"><%= t('views.quiz_performs.show.question') %></th>
-    <th class="w-25"><%= t('views.quiz_performs.show.your_answer') %></th>
-    <th class="w-25"><%= t('views.quiz_performs.show.answer_result') %></th>
-  </tr>
-  </thead>
-
-  <tbody>
-
-  <% @view_data.each do |question_result| %>
+<div class="container-fluid mx-auto">
+  <table class="table table-hover table-sm">
+    <thead class="thead-light">
     <tr>
-      <td class="w-50">
-        <%= question_result[:question].question %>
-      </td>
-
-      <td class="w-25">
-        <ul class="comma-list">
-          <% question_result[:user_answers].each do |answer| %>
-            <% if answer.right %>
-              <li class="d-inline text-success font-weight-bold">
-                <%= answer.title %>
-              </li>
-            <% else %>
-              <li class="d-inline text-danger font-weight-bold">
-                <%= answer.title %>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
-      </td>
-
-      <td class="w-25">
-        <% if question_result[:user_right_count] == question_result[:right_count] %>
-          <p class="d-inline text-success font-weight-bold">
-            <%= question_result[:user_right_count] %>/<%= question_result[:right_count] %>
-          </p>
-        <% else %>
-          <p class="d-inline text-danger font-weight-bold">
-            <%= question_result[:user_right_count] %>/<%= question_result[:right_count] %>
-          </p>
-        <% end %>
-      </td>
+      <th class="w-50"><%= t('views.quiz_performs.show.question') %></th>
+      <th class="w-25"><%= t('views.quiz_performs.show.your_answer') %></th>
+      <th class="w-25"><%= t('views.quiz_performs.show.answer_result') %></th>
     </tr>
-  <% end %>
+    </thead>
 
-  </tbody>
-</table>
+    <tbody>
+
+    <% @view_data.each do |question_result| %>
+      <tr>
+        <td class="w-50">
+          <%= question_result[:question].question %>
+        </td>
+
+        <td class="w-25">
+          <ul class="comma-list">
+            <% question_result[:user_answers].each do |answer| %>
+              <% if answer.right %>
+                <li class="d-inline text-success font-weight-bold">
+                  <%= answer.title %>
+                </li>
+              <% else %>
+                <li class="d-inline text-danger font-weight-bold">
+                  <%= answer.title %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </td>
+
+        <td class="w-25">
+          <% if question_result[:user_right_count] == question_result[:right_count] %>
+            <p class="d-inline text-success font-weight-bold">
+              <%= question_result[:user_right_count] %>/<%= question_result[:right_count] %>
+            </p>
+          <% else %>
+            <p class="d-inline text-danger font-weight-bold">
+              <%= question_result[:user_right_count] %>/<%= question_result[:right_count] %>
+            </p>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
