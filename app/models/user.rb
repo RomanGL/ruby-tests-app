@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :quiz_performs, dependent: :destroy
+  has_many :quiz_performs, dependent: :delete_all
   after_create :assign_default_role
 
   rolify

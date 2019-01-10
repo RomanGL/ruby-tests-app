@@ -73,7 +73,7 @@ ru:
 
       questions_button: Вопросы
       create_button: Создать тест
-      start_test_button: Выполнить
+      quiz_progress_button: Прогресс
 
       new:
         modal_title: Создать тест

@@ -50,7 +50,7 @@
         <td class="w-25">
           <div class="btn-group mt-2 mb-4 my-md-0">
             <% if can? :read, Quiz %>
-              <%= link_to t('views.quizzes.start_test_button'),
+              <%= link_to t('views.quizzes.quiz_progress_button'),
                           quiz_performs_path({ :quiz_id => quiz.id }),
                           {:class => 'btn btn-primary'} %>
             <% end %>
@@ -61,7 +61,7 @@
                               :action => 'index',
                               :quiz_id => quiz.id
                           },
-                          {:class => 'btn btn-primary'} %>
+                          {:class => 'btn btn-warning'} %>
             <% end %>
             <% if can? :edit, Quiz %>
               <%= link_to t('views.common.edit_button'),

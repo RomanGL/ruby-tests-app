@@ -31,7 +31,10 @@
   <% end %>
 </div>
 
-<% if @view_data.any? %>
+<% if @view_data[:current_user].any? %>
+  <% unless @view_data[:other_users].nil? %>
+    <h5 class="ml-4">Ваши попытки</h5>
+  <% end %>
 
   <table class="table table-hover table-sm">
     <thead class="thead-light">
@@ -44,7 +47,7 @@
 
     <tbody>
 
-    <% @view_data.each do |data_item| %>
+    <% @view_data[:current_user].each do |data_item| %>
       <tr>
         <td class="w-50">
           <%= l(data_item[:perform].created_at.localtime, format: :long) %>
@@ -59,7 +62,7 @@
         <td class="w-25">
           <%= link_to 'Подробнее',
                       show_quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
-                      class: 'btn btn-primary' %>
+                      class: 'btn btn-primary btn-sm' %>
         </td>
       </tr>
     <% end %>
@@ -70,4 +73,59 @@
   <div class="alert alert-info my-3 mx-3" role="alert">
     Вы еще ни разу не выполнили этот тест.
   </div>
+<% end %>
+
+<% unless @view_data[:other_users].nil? %>
+  <% if @view_data[:other_users].any? %>
+    <% @view_data[:other_users].each_value do |user_performs| %>
+      <h5 class="ml-4 mt-4">
+        <%= user_performs[:user].name %>
+        <% if user_performs[:success] %>
+          <span class="badge badge-success">Тест пройден успешно</span>
+        <% else %>
+          <span class="badge badge-danger">Тест не пройден</span>
+        <% end %>
+      </h5>
+
+      <table class="table table-hover table-sm">
+        <thead class="thead-light">
+        <tr>
+          <th class="w-25">Дата попытки</th>
+          <th class="w-25">Результат</th>
+          <th class="w-25">Действия</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <% user_performs[:performs].each do |perform| %>
+          <tr>
+            <td class="w-50">
+              <%= l(perform[:perform].created_at.localtime, format: :long) %>
+            </td>
+            <td class="w-25">
+              <% if perform[:success] %>
+                <span class="badge badge-success">Верно</span>
+              <% else %>
+                <span class="badge badge-danger">Неверно</span>
+              <% end %>
+            </td>
+            <td class="w-25">
+              <%= link_to 'Подробнее',
+                          show_quiz_perform_path({quiz_id: @quiz.id, perform_id: perform[:perform].id}),
+                          class: 'btn btn-primary btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+    <% end %>
+
+
+  <% else %>
+    <div class="alert alert-warning my-3 mx-3" role="alert">
+      Другие пользователи еще не выполняли этот тест.
+    </div>
+  <% end %>
 <% end %>

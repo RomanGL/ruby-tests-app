@@ -8,7 +8,8 @@ class QuizPerformsController < ApplicationController
     questions = @quiz.questions.all
 
     @quiz_successful = false
-    @view_data = []
+
+    current_user_performs = []
     performs.each do |perform|
       success = true
 
@@ -28,12 +29,22 @@ class QuizPerformsController < ApplicationController
         @quiz_successful = success
       end
 
-      @view_data <<
+      current_user_performs <<
           {
               :perform => perform,
               :success => success
           }
     end
+
+    @view_data =
+        {
+            :current_user => current_user_performs,
+            :other_users => nil
+        }
+
+    return unless can_read_all_performs?
+
+    @view_data[:other_users] = other_users_performs(questions)
   end
 
   def new
@@ -116,6 +127,49 @@ class QuizPerformsController < ApplicationController
   end
 
   private
+
+  def other_users_performs(questions)
+    other_users_performs = {}
+    other_performs = @quiz.quiz_performs.where("user_id != #{current_user.id}")
+
+    other_performs.each do |perform|
+      success = true
+
+      unless other_users_performs.has_key? perform.user_id
+        user = User.find perform.user_id
+        other_users_performs[perform.user_id] =
+            {
+                :user => user,
+                :success => false,
+                :performs => []
+            }
+      end
+
+      questions.each do |question|
+        break unless success
+
+        question_answers = perform.question_answers.where question_id: question.id
+        answers = question_answers.map {|qa| qa.answer}
+
+        right_count = question.answers.where(right: true).count
+        user_right_count = answers.count {|a| a.right}
+
+        success = user_right_count == right_count
+      end
+
+      unless other_users_performs[perform.user_id][:success]
+        other_users_performs[perform.user_id][:success] = success
+      end
+
+      other_users_performs[perform.user_id][:performs] <<
+          {
+              :perform => perform,
+              :success => success
+          }
+    end
+
+    other_users_performs
+  end
 
   def can_read_all_performs?
     current_user.has_role? :admin
