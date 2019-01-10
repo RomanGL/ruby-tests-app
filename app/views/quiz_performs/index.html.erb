@@ -60,9 +60,18 @@
           <% end %>
         </td>
         <td class="w-25">
-          <%= link_to 'Подробнее',
-                      show_quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
-                      class: 'btn btn-primary btn-sm' %>
+          <div class="btn-group mt-2 mb-4 my-md-0">
+            <%= link_to 'Подробнее',
+                        quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
+                        class: 'btn btn-primary btn-sm' %>
+            <% if can? :destroy, QuizPerform %>
+              <%= link_to t('views.common.remove_button'),
+                          quiz_perform_path({quiz_id: @quiz.id, perform_id: data_item[:perform].id}),
+                          class: 'btn btn-danger btn-sm',
+                          method: :delete,
+                          data: {confirm: t('views.common.are_you_sure_message')} %>
+            <% end %>
+          </div>
         </td>
       </tr>
     <% end %>
@@ -111,9 +120,18 @@
               <% end %>
             </td>
             <td class="w-25">
-              <%= link_to 'Подробнее',
-                          show_quiz_perform_path({quiz_id: @quiz.id, perform_id: perform[:perform].id}),
-                          class: 'btn btn-primary btn-sm' %>
+              <div class="btn-group mt-2 mb-4 my-md-0">
+                <%= link_to 'Подробнее',
+                            quiz_perform_path({quiz_id: @quiz.id, perform_id: perform[:perform].id}),
+                            class: 'btn btn-primary btn-sm' %>
+                <% if can? :destroy, QuizPerform %>
+                  <%= link_to t('views.common.remove_button'),
+                              quiz_perform_path({quiz_id: @quiz.id, perform_id: perform[:perform].id}),
+                              class: 'btn btn-danger btn-sm',
+                              method: :delete,
+                              data: {confirm: t('views.common.are_you_sure_message')} %>
+                <% end %>
+              </div>
             </td>
           </tr>
         <% end %>

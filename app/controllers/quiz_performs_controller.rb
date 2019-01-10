@@ -56,6 +56,7 @@ class QuizPerformsController < ApplicationController
 
   # noinspection RailsChecklist01
   def create
+    forbidden and return unless user_signed_in?
     not_found and return unless params[:quiz_id].present? &&
         params[:result].present?
 
@@ -123,6 +124,19 @@ class QuizPerformsController < ApplicationController
               :right_count => right_count,
               :user_right_count => user_right_count
           }
+    end
+  end
+
+  def destroy
+    not_found and return unless params[:quiz_id].present? &&
+        params[:perform_id].present?
+
+    if cannot? :destroy, QuizPerform
+      forbidden and return
+    else
+      quiz_perform = QuizPerform.find params[:perform_id]
+      quiz_perform.destroy!
+      redirect_to quiz_performs_path quiz_id: params[:quiz_id]
     end
   end
 

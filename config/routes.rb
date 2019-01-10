@@ -25,9 +25,9 @@ Rails.application.routes.draw do
   scope '/quiz_performs' do
     get '/:quiz_id', :to => 'quiz_performs#index', as: 'quiz_performs'
     get '/:quiz_id/new', :to => 'quiz_performs#new', as: 'new_quiz_perform'
-    get '/:quiz_id/:perform_id', :to => 'quiz_performs#show', as: 'show_quiz_perform'
+    get '/:quiz_id/:perform_id', :to => 'quiz_performs#show', as: 'quiz_perform'
     post '/:quiz_id', :to => 'quiz_performs#create'
-    delete '/:quiz_id', :to => 'quiz_performs#destroy'
+    delete '/:quiz_id/:perform_id', :to => 'quiz_performs#destroy'
   end
 
   root 'welcome#index'
