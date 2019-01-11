@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     if cannot? :read, Question # Список вопросов
-      redirect_to "http://localhost:3000/403"
+      redirect_to "/403"
     else
       @quiz = Quiz.find params[:quiz_id]
       @questions = @quiz.questions.all
@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
 
   def new
     if cannot? :create, Question # Создать вопрос
-      redirect_to "http://localhost:3000/403"
+      redirect_to "/403"
     else
       @quiz = Quiz.find params[:quiz_id]
       @question = @quiz.questions.new
@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
 
   def create
     if cannot? :create, Question # Создать вопрос
-      redirect_to "http://localhost:3000/403"
+      redirect_to "/403"
     else
       @quiz = Quiz.find params[:quiz_id]
       @question = @quiz.questions.new question_params
@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
 
   def edit
     if cannot? :edit, Question # Изменить вопрос
-      redirect_to "http://localhost:3000/403"
+      redirect_to "/403"
     else
       @quiz = Quiz.find params[:quiz_id]
       @question = @quiz.questions.find params[:id]
@@ -47,7 +47,7 @@ class QuestionsController < ApplicationController
 
   def update
     if cannot? :edit, Question # Изменить вопрос
-      redirect_to "http://localhost:3000/403"
+      redirect_to "/403"
     else
       @quiz = Quiz.find params[:quiz_id]
       @question = @quiz.questions.find params[:id]
@@ -62,7 +62,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     if cannot? :destroy, Question # Удалить вопрос
-      redirect_to "http://localhost:3000/403"
+      redirect_to "/403"
     else
       @quiz = Quiz.find params[:quiz_id]
       @question = @quiz.questions.find params[:id]
